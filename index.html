@@ -20,6 +20,15 @@
 }
 *,*::before,*::after{box-sizing:inherit}
 html,body{height:100%;margin:0}
+:root{color-scheme:dark}
+*{scrollbar-width:thin;scrollbar-color:var(--bg2) transparent}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bg1);border:3px solid var(--bg);border-radius:0}
+::-webkit-scrollbar-thumb:hover{background:var(--bg3)}
+::-webkit-scrollbar-corner{background:transparent}
+.chips{scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
 body{background:var(--bg);color:var(--fg);font:14px/1.55 var(--mono);overflow:hidden}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left}
 a{color:var(--bl)}
