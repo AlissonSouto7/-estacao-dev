@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Estação Dev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E8EDF1; --surface:#FFFFFF; --surface-2:#F3F6F8; --ink:#15202B; --muted:#5A6A79; --rule:#CAD4DC;
+  --ok:#2F9E64; --warn:#C24A2C; --focus:#2E6BD8;
+  --l1:#E4572E; --l2:#2E86AB; --l3:#2F9E64; --l4:#E0A526; --l5:#7A5AF8; --l6:#D6457F;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Figtree", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E151E; --surface:#16202B; --surface-2:#1C2835; --ink:#E7EDF2; --muted:#93A3B2; --rule:#2B3948;
+    --ok:#4CC488; --warn:#F07A5A; --focus:#7FA8FF; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E151E; --surface:#16202B; --surface-2:#1C2835; --ink:#E7EDF2; --muted:#93A3B2; --rule:#2B3948;
+  --ok:#4CC488; --warn:#F07A5A; --focus:#7FA8FF; color-scheme: dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
+a{color:inherit}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* topo */
+.topo{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:14px 24px;border-bottom:1px solid var(--rule);background:var(--surface);position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
+.marca{font-family:var(--display);font-weight:800;font-size:1.35rem;letter-spacing:-.02em;display:flex;align-items:center;gap:10px;margin-right:auto}
+.marca svg{flex:none}
+.jogador{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.nivel{display:flex;align-items:center;gap:10px}
+.nivel-num{font-family:var(--display);font-weight:800;font-size:1.5rem;line-height:1;min-width:2ch;text-align:center}
+.nivel-info{display:flex;flex-direction:column;gap:4px;min-width:150px}
+.nivel-titulo{font-weight:700;font-size:.9rem}
+.xpbar{height:8px;background:var(--surface-2);border:1px solid var(--rule);border-radius:99px;overflow:hidden}
+.xpbar i{display:block;height:100%;background:var(--ink);border-radius:99px;transition:width .5s ease}
+.xp-txt{font-size:.78rem;color:var(--muted)}
+.chama{display:flex;align-items:center;gap:6px;font-weight:700}
+.chama.off{color:var(--muted);font-weight:400}
+.btn{border:1px solid var(--rule);background:var(--surface);padding:8px 14px;border-radius:10px;font-weight:700;font-size:.92rem;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.btn:hover{background:var(--surface-2)}
+.btn.forte{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.btn.forte:hover{opacity:.9}
+.btn.perigo{color:var(--warn)}
+.btn.mini{padding:4px 9px;font-size:.8rem;border-radius:8px}
+.toggle-edit[aria-pressed="true"]{background:var(--l4);border-color:var(--l4);color:#15202B}
+
+/* layout */
+.layout{display:grid;grid-template-columns:270px 1fr;min-height:calc(100% - 70px)}
+.linhas{border-right:1px solid var(--rule);padding:20px 16px;display:flex;flex-direction:column;gap:6px}
+.linhas h2{font-family:var(--display);font-size:1rem;margin:0 8px 8px;color:var(--muted);font-weight:700}
+.linha-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;border:1px solid transparent;background:none;text-align:left;width:100%}
+.linha-item:hover{background:var(--surface)}
+.linha-item[aria-current="true"]{background:var(--surface);border-color:var(--rule)}
+.linha-bolha{width:30px;height:30px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:.85rem;flex:none}
+.linha-txt{display:flex;flex-direction:column;min-width:0;flex:1}
+.linha-nome{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.linha-prog{font-size:.8rem;color:var(--muted)}
+.linhas .sep{height:1px;background:var(--rule);margin:12px 4px}
+.aba-btn{background:none;border:0;padding:10px 12px;border-radius:12px;text-align:left;font-weight:700;display:flex;gap:10px;align-items:center}
+.aba-btn:hover{background:var(--surface)}
+.aba-btn[aria-current="true"]{background:var(--surface);outline:1px solid var(--rule)}
+
+/* mapa */
+.mapa{padding:32px clamp(18px,4vw,56px) 80px;max-width:900px;width:100%}
+.cab-trilha{display:flex;gap:18px;align-items:flex-end;flex-wrap:wrap;margin-bottom:8px}
+.cab-trilha h1{font-family:var(--display);font-weight:800;font-size:clamp(2rem,5vw,3.2rem);line-height:1;letter-spacing:-.03em;margin:0;flex:1 1 300px}
+.cab-desc{color:var(--muted);max-width:62ch;margin:10px 0 18px}
+.prog-geral{display:flex;align-items:center;gap:14px;margin-bottom:26px;flex-wrap:wrap}
+.prog-geral .barra{flex:1 1 200px;height:12px;border-radius:99px;background:var(--surface);border:1px solid var(--rule);overflow:hidden}
+.prog-geral .barra i{display:block;height:100%;background:var(--c);transition:width .5s ease}
+.prog-geral strong{font-family:var(--display);font-size:1.1rem}
+.admin-barra{display:flex;gap:8px;flex-wrap:wrap;padding:12px;border:1px dashed var(--l4);border-radius:12px;margin-bottom:26px;background:color-mix(in srgb,var(--l4) 8%,transparent)}
+
+.zona{position:relative;margin:0 0 6px}
+.zona-cab{display:flex;align-items:center;gap:14px;padding:6px 0;flex-wrap:wrap}
+.baldeacao{width:44px;height:28px;border-radius:14px;border:4px solid var(--c);background:var(--surface);flex:none;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:.75rem;color:var(--c)}
+.zona.completa .baldeacao{background:var(--c);color:#fff}
+.zona-cab h2{font-family:var(--display);font-size:1.3rem;margin:0;letter-spacing:-.01em}
+.zona-prog{color:var(--muted);font-size:.85rem}
+.zona-admin{display:flex;gap:6px;margin-left:auto}
+
+.estacoes{list-style:none;margin:0;padding:0 0 18px 20px;position:relative}
+.estacoes::before{content:"";position:absolute;left:18px;top:0;bottom:0;width:8px;background:var(--c);border-radius:4px;opacity:.28}
+.estacoes .trilho-feito{position:absolute;left:18px;top:0;width:8px;background:var(--c);border-radius:4px;transition:height .6s ease}
+.estacao{position:relative;display:flex;align-items:center;gap:8px;min-height:58px}
+.ponto{display:flex;align-items:center;gap:14px;background:none;border:0;padding:8px 10px 8px 0;text-align:left;flex:1;border-radius:12px;min-width:0}
+.ponto:hover .nome{text-decoration:underline;text-underline-offset:3px}
+.circ{width:26px;height:26px;border-radius:50%;border:5px solid var(--c);background:var(--surface);flex:none;position:relative;z-index:1;margin-left:-9px;display:grid;place-items:center;transition:transform .2s}
+.estacao.feita .circ{background:var(--c)}
+.estacao.feita .circ::after{content:"";width:8px;height:5px;border-left:2.5px solid #fff;border-bottom:2.5px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.estacao.proxima .circ{width:34px;height:34px;margin-left:-13px;border-width:6px;box-shadow:0 0 0 0 color-mix(in srgb,var(--c) 55%,transparent);animation:pulso 2s infinite}
+@keyframes pulso{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--c) 55%,transparent)}70%{box-shadow:0 0 0 12px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.num{font-family:var(--display);font-weight:700;color:var(--muted);font-size:.85rem;min-width:2.2ch;text-align:right}
+.nome{font-weight:700;overflow-wrap:anywhere}
+.estacao.feita .nome{color:var(--muted);font-weight:400}
+.estacao.proxima .nome{font-size:1.08rem}
+.tag-prox{font-size:.72rem;font-weight:700;background:var(--c);color:#fff;padding:2px 8px;border-radius:99px;white-space:nowrap}
+.tag-mat{font-size:.75rem;color:var(--muted);white-space:nowrap}
+.est-admin{display:flex;gap:4px;flex:none}
+.add-aula{margin:4px 0 0 18px}
+
+.vazio{border:2px dashed var(--rule);border-radius:18px;padding:40px 28px;text-align:center;color:var(--muted)}
+.vazio h2{font-family:var(--display);color:var(--ink);margin:0 0 8px}
+.carregando{padding:60px;color:var(--muted)}
+
+/* ranking */
+.rank{list-style:none;padding:0;margin:20px 0 0;display:flex;flex-direction:column;gap:8px}
+.rank li{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:12px 16px}
+.rank .pos{font-family:var(--display);font-weight:800;font-size:1.4rem;width:2ch;text-align:center}
+.rank .quem{flex:1;min-width:0}
+.rank .quem strong{display:block}
+.rank .quem span{font-size:.85rem;color:var(--muted)}
+.rank .xp{font-family:var(--display);font-weight:800}
+.rank li.eu{border-color:var(--ink)}
+.aviso{background:var(--surface);border:1px solid var(--rule);border-left:4px solid var(--l4);padding:12px 14px;border-radius:10px;font-size:.92rem;color:var(--muted);margin-top:16px}
+
+/* painel da aula */
+.painel{position:fixed;top:0;right:0;bottom:0;width:min(520px,100%);background:var(--surface);border-left:1px solid var(--rule);z-index:40;transform:translateX(105%);transition:transform .28s ease;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.painel.aberto{transform:none}
+.painel-cab{display:flex;align-items:flex-start;gap:12px;padding:20px 22px 14px;border-bottom:1px solid var(--rule)}
+.painel-cab .meta{font-size:.85rem;color:var(--muted)}
+.painel-cab h2{font-family:var(--display);margin:2px 0 0;font-size:1.45rem;line-height:1.15}
+.fechar{margin-left:auto;background:none;border:1px solid var(--rule);border-radius:10px;width:38px;height:38px;flex:none;font-size:1.2rem}
+.painel-corpo{padding:18px 22px;overflow:auto;flex:1;display:flex;flex-direction:column;gap:20px}
+.video{aspect-ratio:16/9;background:var(--c);border-radius:14px;display:flex;flex-direction:column;justify-content:flex-end;padding:18px;color:#fff;position:relative;overflow:hidden}
+.video::before{content:"";position:absolute;inset:-40% -10% auto auto;width:70%;aspect-ratio:1;border-radius:50%;border:26px solid rgba(255,255,255,.14)}
+.video .play{position:absolute;inset:0;display:grid;place-items:center}
+.video .play span{width:68px;height:68px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center}
+.video .play span::after{content:"";border-left:20px solid var(--c);border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
+.video a.play{text-decoration:none}
+.video small{position:relative;font-weight:700}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.acoes-video{display:flex;gap:8px;flex-wrap:wrap}
+.secao h3{font-family:var(--display);font-size:1rem;margin:0 0 8px}
+.materiais{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.materiais a{display:flex;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--rule);border-radius:10px;text-decoration:none;font-weight:700}
+.materiais a:hover{background:var(--surface-2)}
+.materiais a span{color:var(--muted);font-weight:400;font-size:.82rem;margin-left:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:45%}
+.notas{white-space:pre-wrap;background:var(--surface-2);border-radius:10px;padding:12px 14px;overflow-wrap:anywhere}
+.painel-pe{border-top:1px solid var(--rule);padding:14px 22px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.concluir{flex:1 1 220px;justify-content:center;padding:13px;font-size:1rem}
+.concluir.feito{background:var(--ok);border-color:var(--ok);color:#fff}
+.veu{position:fixed;inset:0;background:rgba(10,15,22,.45);z-index:35;opacity:0;pointer-events:none;transition:opacity .2s}
+.veu.ativo{opacity:1;pointer-events:auto}
+
+/* dialog admin */
+dialog{border:1px solid var(--rule);border-radius:18px;background:var(--surface);color:var(--ink);padding:0;width:min(560px,calc(100% - 24px));max-height:calc(100% - 40px)}
+dialog::backdrop{background:rgba(10,15,22,.5)}
+dialog form{display:flex;flex-direction:column;gap:14px;padding:22px}
+dialog h2{font-family:var(--display);margin:0;font-size:1.35rem}
+.campo{display:flex;flex-direction:column;gap:6px}
+.campo label{font-weight:700;font-size:.92rem}
+.campo small{color:var(--muted);font-size:.82rem}
+.campo input[type=text],.campo input[type=url],.campo textarea{border:1px solid var(--rule);background:var(--surface-2);border-radius:10px;padding:10px 12px;width:100%}
+.campo textarea{min-height:110px;resize:vertical;font-family:ui-monospace,Consolas,monospace;font-size:.88rem}
+.cores{display:flex;gap:10px;flex-wrap:wrap}
+.cores label{position:relative}
+.cores input{position:absolute;opacity:0}
+.cores span{display:block;width:34px;height:34px;border-radius:50%;background:var(--sw);border:3px solid transparent;outline:2px solid transparent}
+.cores input:checked+span{border-color:var(--surface);outline-color:var(--ink)}
+.cores input:focus-visible+span{outline:3px solid var(--focus)}
+.dlg-acoes{display:flex;gap:8px;justify-content:flex-end}
+
+/* toast e celebração */
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--surface);padding:12px 18px;border-radius:12px;font-weight:700;z-index:60;opacity:0;transition:.25s;pointer-events:none;max-width:calc(100% - 32px)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.festa{position:fixed;inset:0;z-index:70;display:grid;place-items:center;background:rgba(10,15,22,.55);opacity:0;pointer-events:none;transition:opacity .25s}
+.festa.on{opacity:1;pointer-events:auto}
+.festa-card{background:var(--surface);border-radius:24px;padding:36px 40px;text-align:center;max-width:min(420px,calc(100% - 32px));transform:scale(.85);transition:transform .35s cubic-bezier(.2,1.4,.4,1)}
+.festa.on .festa-card{transform:none}
+.festa-card .big{font-family:var(--display);font-weight:800;font-size:5rem;line-height:1;letter-spacing:-.04em}
+.festa-card p{color:var(--muted);margin:8px 0 20px}
+.faisca{position:fixed;width:9px;height:9px;border-radius:2px;z-index:65;pointer-events:none;animation:voa .8s ease-out forwards}
+@keyframes voa{to{transform:translate(var(--dx),var(--dy)) rotate(260deg);opacity:0}}
+
+@media (max-width:820px){
+  .topo{gap:10px}
+  .marca{font-size:1.1rem}
+  .marca svg{width:24px;height:24px}
+  .jogador{width:100%;gap:14px;flex-wrap:nowrap}
+  .nivel{flex:1;min-width:0}
+  .nivel-info{flex:1;min-width:0}
+  .nivel-num{font-size:1.25rem}
+  .mapa{padding:20px 16px 80px}
+  .cab-trilha{gap:12px;align-items:center}
+  .cab-trilha h1{font-size:1.9rem;flex-basis:100%}
+  .cab-desc{margin:6px 0 12px;font-size:.95rem}
+  .prog-geral{margin-bottom:18px;gap:10px}
+  .zona-cab{gap:10px}
+  .zona-cab h2{font-size:1.08rem;flex:1;min-width:0}
+  .baldeacao{width:36px;height:24px;border-width:3px}
+  .estacao{min-height:46px}
+  .ponto{gap:10px;padding:6px 6px 6px 0}
+  .nome{font-size:.95rem}
+  .estacao.proxima .nome{font-size:1rem}
+  .tag-mat{display:none}
+  .layout{grid-template-columns:1fr}
+  .linhas{border-right:0;border-bottom:1px solid var(--rule);flex-direction:row;overflow-x:auto;padding:12px 14px;gap:8px}
+  .linhas h2,.linhas .sep{display:none}
+  .linha-item,.aba-btn{width:auto;flex:none;background:var(--surface);border:1px solid var(--rule)}
+  .linha-txt{max-width:150px}
+  .topo{padding:12px 16px;gap:12px}
+  .nivel-info{min-width:110px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<header class="topo">
+  <div class="marca">
+    <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect x="3" y="12" width="24" height="6" rx="3" fill="var(--l2)"/><rect x="12" y="3" width="6" height="24" rx="3" fill="var(--l1)"/><circle cx="15" cy="15" r="6" fill="var(--surface)" stroke="var(--ink)" stroke-width="3"/></svg>
+    Estação Dev
+  </div>
+  <div class="jogador" id="jogador"></div>
+  <div id="ctrl-admin"></div>
+</header>
+<div class="layout">
+  <nav class="linhas" id="linhas" aria-label="Trilhas"></nav>
+  <main class="mapa" id="mapa"><p class="carregando">Carregando trilhas…</p></main>
+</div>
+<div class="veu" id="veu"></div>
+<aside class="painel" id="painel" aria-hidden="true" aria-labelledby="painel-titulo"></aside>
+<dialog id="dlg"></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="festa" id="festa" role="dialog" aria-modal="true" aria-label="Subiu de nível"></div>
+
+<script>
+const PALETA = ["#E4572E","#2E86AB","#2F9E64","#E0A526","#7A5AF8","#D6457F"];
+const TITULOS = ["Estagiário","Júnior I","Júnior II","Júnior III","Pleno I","Pleno II","Pleno III","Sênior I","Sênior II","Sênior III","Tech Lead","Arquiteto","Lenda do Stack Overflow"];
+const XP_AULA = 10, XP_MODULO = 50, XP_NIVEL = 100;
+const LS_PROG = "estacao:progresso", LS_RASCUNHO = "estacao:rascunho", LS_ATUAL = "estacao:atual";
+
+const S = {
+  modo: "carregando", rascunho: false,
+  admin: false, editando: false,
+  trilhas: [], atualId: lsGet(LS_ATUAL, null), aba: "mapa",
+  prog: lsGet(LS_PROG, { concl: {} }),
+  aulaAberta: null, verAqui: true,
+};
+
+/* ---------- utilidades ---------- */
+function lsGet(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
+function lsSet(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+function novoId(){ return Math.random().toString(36).slice(2,10) + Date.now().toString(36).slice(-4); }
+function esc(s){ return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function linkify(t){
+  return esc(t).replace(/(https?:\/\/[^\s<]+)/g, u => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`);
+}
+function urlSegura(u){ try{ const x = new URL(u); return /^https?:$/.test(x.protocol) ? x.href : null; }catch(e){ return null; } }
+function ytId(url){
+  if(!url) return null;
+  try{
+    const u = new URL(url);
+    if(u.hostname.includes("youtu.be")) return u.pathname.slice(1).split("/")[0] || null;
+    if(u.searchParams.get("v")) return u.searchParams.get("v");
+    const m = u.pathname.match(/\/(embed|shorts|live)\/([^/?]+)/);
+    return m ? m[2] : null;
+  }catch(e){ return null; }
+}
+function hojeStr(d = new Date()){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function clone(o){ return JSON.parse(JSON.stringify(o)); }
+
+/* ---------- cálculo de jogo ---------- */
+function todasAulas(t){ return (t.modulos||[]).flatMap(m => m.aulas||[]); }
+function feita(id){ return !!S.prog.concl[id]; }
+function moduloCompleto(m){ return (m.aulas||[]).length > 0 && m.aulas.every(a => feita(a.id)); }
+function xpTotal(){
+  let xp = Object.keys(S.prog.concl).length * XP_AULA;
+  for(const t of S.trilhas) for(const m of (t.modulos||[])) if(moduloCompleto(m)) xp += XP_MODULO;
+  return xp;
+}
+function nivelDe(xp){ return Math.floor(xp / XP_NIVEL) + 1; }
+function tituloDe(n){ return TITULOS[Math.min(n-1, TITULOS.length-1)]; }
+function sequencia(){
+  const dias = new Set(Object.values(S.prog.concl).map(v => hojeStr(new Date(v))));
+  let d = new Date(); let n = 0;
+  if(!dias.has(hojeStr(d))) d.setDate(d.getDate()-1);
+  while(dias.has(hojeStr(d))){ n++; d.setDate(d.getDate()-1); }
+  return { n, hoje: dias.has(hojeStr()) };
+}
+function trilhaAtual(){
+  return S.trilhas.find(t => t.id === S.atualId) || S.trilhas[0] || null;
+}
+function proximaAula(t){ return todasAulas(t).find(a => !feita(a.id)) || null; }
+function acharAula(id){
+  for(const t of S.trilhas) for(const m of (t.modulos||[])) for(const a of (m.aulas||[])) if(a.id === id) return { t, m, a };
+  return null;
+}
+
+/* ---------- persistência ---------- */
+function gravarRascunho(){
+  S.rascunho = true; lsSet(LS_RASCUNHO, { trilhas: S.trilhas, em: new Date().toISOString() }); render();
+}
+async function salvarTrilha(t){
+  t.atualizado = new Date().toISOString();
+  const i = S.trilhas.findIndex(x => x.id === t.id);
+  if(i >= 0) S.trilhas[i] = t; else S.trilhas.push(t);
+  ordenar(S.trilhas); gravarRascunho();
+}
+async function apagarTrilha(id){
+  S.trilhas = S.trilhas.filter(t => t.id !== id); gravarRascunho();
+}
+function salvarProgresso(){ lsSet(LS_PROG, S.prog); }
+function baixarConteudo(){
+  const dados = JSON.stringify({ versao: 1, gerado: new Date().toISOString(), trilhas: S.trilhas }, null, 2);
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([dados], { type: "application/json" }));
+  a.download = "conteudo.json"; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  toast("conteudo.json baixado. Agora suba ele no GitHub.");
+}
+async function descartarRascunho(){
+  if(!confirm("Descartar as mudanças não publicadas e voltar ao conteúdo do site?")) return;
+  localStorage.removeItem(LS_RASCUNHO); S.rascunho = false; await carregarPublicado(); render();
+}
+
+/* ---------- render ---------- */
+function render(){
+  renderJogador(); renderCtrlAdmin(); renderLinhas();
+  renderMapa();
+  if(S.aulaAberta) renderPainel();
+}
+
+function renderJogador(){
+  const xp = xpTotal(), n = nivelDe(xp), resto = xp % XP_NIVEL, seq = sequencia();
+  document.getElementById("jogador").innerHTML = `
+    <div class="nivel" title="Nível ${n}">
+      <span class="nivel-num" aria-label="Nível">${n}</span>
+      <div class="nivel-info">
+        <span class="nivel-titulo">${esc(tituloDe(n))}</span>
+        <div class="xpbar" role="progressbar" aria-valuemin="0" aria-valuemax="${XP_NIVEL}" aria-valuenow="${resto}" aria-label="XP para o próximo nível"><i style="width:${resto}%"></i></div>
+        <span class="xp-txt">${xp} XP · faltam ${XP_NIVEL - resto} para o nível ${n+1}</span>
+      </div>
+    </div>
+    <span class="chama ${seq.n ? "" : "off"}" title="${seq.hoje ? "Você já estudou hoje" : "Conclua uma aula hoje para manter a sequência"}">
+      <svg width="18" height="20" viewBox="0 0 18 20" aria-hidden="true"><path d="M9 1c1 4 6 6 6 11a6 6 0 0 1-12 0c0-3 2-4 2-7 2 1 3 3 3 5 2-2 2-5 1-9z" fill="${seq.n ? "var(--l1)" : "var(--rule)"}"/></svg>
+      ${seq.n} ${seq.n === 1 ? "dia" : "dias"}
+    </span>`;
+}
+
+function renderCtrlAdmin(){
+  const el = document.getElementById("ctrl-admin");
+  el.innerHTML = S.admin ? `<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+    ${S.rascunho ? `<span class="xp-txt" style="color:var(--warn);font-weight:700">Mudanças não publicadas</span>
+      <button class="btn mini" data-acao="descartar">Descartar</button>
+      <button class="btn forte" data-acao="baixar">Baixar conteudo.json</button>` : ""}
+    <button class="btn toggle-edit" data-acao="toggle-edit" aria-pressed="${S.editando}">${S.editando ? "Sair da edição" : "Editar conteúdo"}</button></div>` : "";
+}
+
+function renderLinhas(){
+  const atual = trilhaAtual();
+  let h = `<h2>Trilhas</h2>`;
+  S.trilhas.forEach((t, i) => {
+    const aulas = todasAulas(t), f = aulas.filter(a => feita(a.id)).length;
+    const pct = aulas.length ? Math.round(f / aulas.length * 100) : 0;
+    h += `<button class="linha-item" style="--c:${esc(t.cor)}" data-acao="ir-trilha" data-id="${t.id}" aria-current="${!!(atual && atual.id === t.id)}">
+      <span class="linha-bolha">${esc((t.sigla || t.titulo || "?").slice(0,2))}</span>
+      <span class="linha-txt"><span class="linha-nome">${esc(t.titulo)}</span><span class="linha-prog">${pct}% · ${f}/${aulas.length} aulas</span></span>
+    </button>`;
+  });
+  if(S.admin && S.editando) h += `<button class="btn" data-acao="nova-trilha" style="margin:6px 4px">+ Nova trilha</button>`;
+
+  document.getElementById("linhas").innerHTML = h;
+}
+
+function renderMapa(){
+  const el = document.getElementById("mapa");
+  if(S.modo === "carregando"){ el.innerHTML = `<p class="carregando">Carregando trilhas…</p>`; return; }
+  const t = trilhaAtual();
+  if(!t){
+    el.innerHTML = S.admin
+      ? `<div class="vazio"><h2>Nenhuma trilha ainda</h2><p>Crie a primeira trilha e cole a lista de aulas do YouTube.</p><button class="btn forte" data-acao="nova-trilha-direto">Criar primeira trilha</button></div>`
+      : `<div class="vazio"><h2>Nenhuma trilha publicada</h2><p>Quando o admin adicionar as aulas, elas aparecem aqui.</p></div>`;
+    return;
+  }
+  const ed = S.admin && S.editando;
+  const aulas = todasAulas(t), f = aulas.filter(a => feita(a.id)).length;
+  const pct = aulas.length ? Math.round(f / aulas.length * 100) : 0;
+  const prox = proximaAula(t);
+  let h = `<div style="--c:${esc(t.cor)}">
+    <div class="cab-trilha">
+      <h1>${esc(t.titulo)}</h1>
+      ${prox ? `<button class="btn forte" data-acao="abrir" data-aula="${prox.id}">${f ? "Continuar de onde parei" : "Começar a trilha"}</button>` : (aulas.length ? `<span class="tag-prox" style="font-size:.9rem;padding:6px 12px">Trilha concluída</span>` : "")}
+    </div>
+    ${t.descricao ? `<p class="cab-desc">${esc(t.descricao)}</p>` : ""}
+    <div class="prog-geral"><div class="barra" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso da trilha"><i style="width:${pct}%"></i></div><strong>${pct}%</strong><span style="color:var(--muted)">${f} de ${aulas.length} aulas</span></div>
+    ${ed ? `<div class="admin-barra">
+      <button class="btn mini" data-acao="editar-trilha">Editar trilha</button>
+      <button class="btn mini" data-acao="novo-modulo">+ Módulo</button>
+      <button class="btn mini" data-acao="importar">Colar lista de aulas</button>
+      <button class="btn mini" data-acao="mover-trilha" data-dir="-1">Subir na lista</button>
+      <button class="btn mini" data-acao="mover-trilha" data-dir="1">Descer na lista</button>
+      <button class="btn mini perigo" data-acao="excluir-trilha">Excluir trilha</button>
+    </div>` : ""}`;
+
+  if(!(t.modulos||[]).length){
+    h += `<div class="vazio"><h2>Trilha sem módulos</h2><p>${ed ? "Adicione um módulo ou cole uma lista de aulas." : "As aulas ainda não foram adicionadas."}</p></div>`;
+  }
+  (t.modulos||[]).forEach((m, mi) => {
+    const ma = m.aulas || [], mf = ma.filter(a => feita(a.id)).length;
+    let feitasSeguidas = 0; for(const a of ma){ if(feita(a.id)) feitasSeguidas++; else break; }
+    const alturaTrilho = ma.length ? (feitasSeguidas / ma.length * 100) : 0;
+    h += `<section class="zona ${moduloCompleto(m) ? "completa" : ""}">
+      <div class="zona-cab">
+        <span class="baldeacao">${mi+1}</span>
+        <h2>${esc(m.titulo)}</h2>
+        <span class="zona-prog">${mf}/${ma.length}${moduloCompleto(m) ? " · +" + XP_MODULO + " XP" : ""}</span>
+        ${ed ? `<div class="zona-admin">
+          <button class="btn mini" data-acao="editar-modulo" data-mod="${m.id}">Renomear</button>
+          <button class="btn mini" data-acao="mover-modulo" data-mod="${m.id}" data-dir="-1" aria-label="Subir módulo">↑</button>
+          <button class="btn mini" data-acao="mover-modulo" data-mod="${m.id}" data-dir="1" aria-label="Descer módulo">↓</button>
+          <button class="btn mini perigo" data-acao="excluir-modulo" data-mod="${m.id}">Excluir</button>
+        </div>` : ""}
+      </div>
+      <ol class="estacoes"><span class="trilho-feito" style="height:${alturaTrilho}%"></span>`;
+    let n = 0;
+    ma.forEach(a => {
+      n++;
+      const cls = feita(a.id) ? "feita" : (prox && prox.id === a.id ? "proxima" : "");
+      const nm = (a.materiais||[]).length;
+      h += `<li class="estacao ${cls}">
+        <button class="ponto" data-acao="abrir" data-aula="${a.id}">
+          <span class="circ"></span><span class="num">${n}</span>
+          <span class="nome">${esc(a.titulo)}</span>
+          ${cls === "proxima" ? `<span class="tag-prox">Próxima</span>` : ""}
+          ${nm ? `<span class="tag-mat">${nm} material${nm > 1 ? "is" : ""}</span>` : ""}
+        </button>
+        ${ed ? `<div class="est-admin">
+          <button class="btn mini" data-acao="editar-aula" data-aula="${a.id}">Editar</button>
+          <button class="btn mini" data-acao="mover-aula" data-aula="${a.id}" data-dir="-1" aria-label="Subir aula">↑</button>
+          <button class="btn mini" data-acao="mover-aula" data-aula="${a.id}" data-dir="1" aria-label="Descer aula">↓</button>
+          <button class="btn mini perigo" data-acao="excluir-aula" data-aula="${a.id}" aria-label="Excluir aula">✕</button>
+        </div>` : ""}
+      </li>`;
+    });
+    h += `</ol>${ed ? `<button class="btn mini add-aula" data-acao="nova-aula" data-mod="${m.id}">+ Aula neste módulo</button>` : ""}</section>`;
+  });
+  h += `</div>`;
+  el.innerHTML = h;
+}
+
+function renderPainel(){
+  const p = document.getElementById("painel");
+  const r = acharAula(S.aulaAberta);
+  if(!r){ fecharPainel(); return; }
+  const { t, m, a } = r;
+  const lista = todasAulas(t), i = lista.findIndex(x => x.id === a.id);
+  const ant = lista[i-1], prox = lista[i+1];
+  const yid = ytId(a.url), link = urlSegura(a.url);
+  const ok = feita(a.id);
+  p.style.setProperty("--c", t.cor);
+  p.innerHTML = `
+    <div class="painel-cab">
+      <div><div class="meta">${esc(t.titulo)} · ${esc(m.titulo)} · aula ${i+1} de ${lista.length}</div>
+      <h2 id="painel-titulo">${esc(a.titulo)}</h2></div>
+      <button class="fechar" data-acao="fechar" aria-label="Fechar">✕</button>
+    </div>
+    <div class="painel-corpo">
+      <div class="video">
+        ${S.verAqui && yid
+          ? `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(yid)}" title="${esc(a.titulo)}" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>`
+          : link ? `<a class="play" href="${esc(link)}" target="_blank" rel="noopener" aria-label="Assistir no YouTube"><span></span></a><small>Abre no YouTube</small>`
+                 : `<small>Esta aula ainda não tem link de vídeo.</small>`}
+      </div>
+      ${link ? `<div class="acoes-video">
+        <a class="btn" href="${esc(link)}" target="_blank" rel="noopener">Assistir no YouTube</a>
+        ${yid ? `<button class="btn" data-acao="ver-aqui">${S.verAqui ? "Fechar player" : "Assistir aqui"}</button>` : ""}
+      </div>` : ""}
+      ${(a.materiais||[]).length ? `<div class="secao"><h3>Materiais</h3><ul class="materiais">${a.materiais.map(x => {
+        const u = urlSegura(x.url); return u ? `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(x.titulo || "Material")}<span>${esc(new URL(u).hostname)}</span></a></li>` : "";
+      }).join("")}</ul></div>` : ""}
+      ${a.notas ? `<div class="secao"><h3>Anotações</h3><div class="notas">${linkify(a.notas)}</div></div>` : ""}
+    </div>
+    <div class="painel-pe">
+      <button class="btn" data-acao="abrir" data-aula="${ant ? ant.id : ""}" ${ant ? "" : "disabled"} aria-label="Aula anterior">‹</button>
+      <button class="btn forte concluir ${ok ? "feito" : ""}" data-acao="concluir" data-aula="${a.id}">${ok ? "Concluída ✓" : "Marcar como concluída  +" + XP_AULA + " XP"}</button>
+      <button class="btn" data-acao="abrir" data-aula="${prox ? prox.id : ""}" ${prox ? "" : "disabled"} aria-label="Próxima aula">›</button>
+    </div>`;
+}
+
+function abrirPainel(id){
+  if(!id) return;
+  if(S.aulaAberta !== id) S.verAqui = true;
+  S.aulaAberta = id; renderPainel();
+  const p = document.getElementById("painel");
+  p.classList.add("aberto"); p.setAttribute("aria-hidden","false");
+  document.getElementById("veu").classList.add("ativo");
+  setTimeout(() => p.querySelector(".fechar")?.focus(), 50);
+}
+function fecharPainel(){
+  S.aulaAberta = null;
+  const p = document.getElementById("painel");
+  p.classList.remove("aberto"); p.setAttribute("aria-hidden","true");
+  document.getElementById("veu").classList.remove("ativo");
+  setTimeout(() => { if(!S.aulaAberta) p.innerHTML = ""; }, 300);
+}
+
+/* ---------- jogo: concluir ---------- */
+function concluir(id, origem){
+  const antesXp = xpTotal(), antesNivel = nivelDe(antesXp);
+  if(feita(id)){ delete S.prog.concl[id]; salvarProgresso(); render(); toast("Aula desmarcada"); return; }
+  S.prog.concl[id] = new Date().toISOString();
+  const r = acharAula(id);
+  const depoisXp = xpTotal(), ganho = depoisXp - antesXp;
+  salvarProgresso(); render();
+  if(origem) faiscas(origem, r ? r.t.cor : PALETA[0]);
+  if(r && moduloCompleto(r.m)) toast(`Módulo "${r.m.titulo}" completo! +${ganho} XP`);
+  else toast(`+${ganho} XP`);
+  if(nivelDe(depoisXp) > antesNivel) festa(nivelDe(depoisXp));
+}
+function faiscas(el, cor){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const b = el.getBoundingClientRect(), cx = b.left + b.width/2, cy = b.top + b.height/2;
+  const cores = [cor, ...PALETA];
+  for(let i = 0; i < 22; i++){
+    const f = document.createElement("span"); f.className = "faisca";
+    const ang = Math.random() * Math.PI * 2, d = 50 + Math.random() * 90;
+    f.style.cssText = `left:${cx}px;top:${cy}px;background:${cores[i % cores.length]};--dx:${Math.cos(ang)*d}px;--dy:${Math.sin(ang)*d - 30}px`;
+    document.body.appendChild(f); setTimeout(() => f.remove(), 850);
+  }
+}
+function festa(n){
+  const el = document.getElementById("festa");
+  el.innerHTML = `<div class="festa-card"><div class="big">${n}</div><h2 style="font-family:var(--display);margin:6px 0 0">Subiu para ${esc(tituloDe(n))}</h2><p>Mais ${XP_NIVEL} XP e você chega ao nível ${n+1}.</p><button class="btn forte" data-acao="fechar-festa">Bora continuar</button></div>`;
+  el.classList.add("on"); setTimeout(() => el.querySelector("button")?.focus(), 50);
+}
+let toastT;
+function toast(msg){
+  const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("on");
+  clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("on"), 2600);
+}
+
+/* ---------- formulários admin ---------- */
+function formulario(titulo, campos, botao = "Salvar"){
+  return new Promise(resolve => {
+    const d = document.getElementById("dlg");
+    let h = `<form method="dialog"><h2>${esc(titulo)}</h2>`;
+    campos.forEach(c => {
+      h += `<div class="campo"><label for="f-${c.nome}">${esc(c.rotulo)}</label>`;
+      if(c.tipo === "textarea") h += `<textarea id="f-${c.nome}" name="${c.nome}" placeholder="${esc(c.placeholder||"")}">${esc(c.valor||"")}</textarea>`;
+      else if(c.tipo === "cor") h += `<div class="cores" role="radiogroup" id="f-${c.nome}">${PALETA.map((p,i) => `<label><input type="radio" name="${c.nome}" value="${p}" ${p === (c.valor || PALETA[0]) ? "checked" : ""}><span style="--sw:${p}"></span><span class="sr">Cor ${i+1}</span></label>`).join("")}</div>`;
+      else h += `<input type="text" id="f-${c.nome}" name="${c.nome}" value="${esc(c.valor||"")}" placeholder="${esc(c.placeholder||"")}" ${c.obrigatorio ? "required" : ""}>`;
+      if(c.ajuda) h += `<small>${esc(c.ajuda)}</small>`;
+      h += `</div>`;
+    });
+    h += `<div class="dlg-acoes"><button class="btn" value="cancelar" formnovalidate>Cancelar</button><button class="btn forte" value="ok">${esc(botao)}</button></div></form>`;
+    d.innerHTML = h;
+    const f = d.querySelector("form");
+    d.onclose = () => {
+      if(d.returnValue !== "ok") return resolve(null);
+      const fd = new FormData(f), out = {};
+      campos.forEach(c => out[c.nome] = (fd.get(c.nome) || "").toString().trim());
+      resolve(out);
+    };
+    d.returnValue = ""; d.showModal();
+  });
+}
+function parseMateriais(txt){
+  return txt.split("\n").map(l => l.trim()).filter(Boolean).map(l => {
+    const [a, b] = l.split("|").map(s => s.trim());
+    return b ? { titulo: a, url: b } : { titulo: "", url: a };
+  }).filter(x => urlSegura(x.url));
+}
+function materiaisTxt(m){ return (m||[]).map(x => (x.titulo ? x.titulo + " | " : "") + x.url).join("\n"); }
+
+async function acaoAdmin(acao, ds){
+  const t = trilhaAtual() ? clone(trilhaAtual()) : null;
+  const acharMod = id => t.modulos.find(m => m.id === id);
+  const acharPos = id => { for(const m of t.modulos){ const i = m.aulas.findIndex(a => a.id === id); if(i >= 0) return { m, i }; } return null; };
+
+  if(acao === "nova-trilha" || acao === "nova-trilha-direto"){
+    const v = await formulario("Nova trilha", [
+      { nome:"titulo", rotulo:"Nome da trilha", placeholder:"Ex.: Spring Boot do zero", obrigatorio:true },
+      { nome:"sigla", rotulo:"Sigla (2 letras)", placeholder:"SB" },
+      { nome:"descricao", rotulo:"Descrição", tipo:"textarea", placeholder:"Para quem é, o que se aprende" },
+      { nome:"cor", rotulo:"Cor da linha", tipo:"cor", valor: PALETA[S.trilhas.length % PALETA.length] },
+    ], "Criar trilha");
+    if(!v || !v.titulo) return;
+    const nova = { id: novoId(), titulo: v.titulo, sigla: v.sigla, descricao: v.descricao, cor: v.cor || PALETA[0],
+      ordem: S.trilhas.length ? Math.max(...S.trilhas.map(x => x.ordem || 0)) + 1 : 1, modulos: [] };
+    S.atualId = nova.id; lsSet(LS_ATUAL, nova.id); S.editando = true;
+    await salvarTrilha(nova); return;
+  }
+  if(!t) return;
+  if(acao === "editar-trilha"){
+    const v = await formulario("Editar trilha", [
+      { nome:"titulo", rotulo:"Nome da trilha", valor:t.titulo, obrigatorio:true },
+      { nome:"sigla", rotulo:"Sigla (2 letras)", valor:t.sigla },
+      { nome:"descricao", rotulo:"Descrição", tipo:"textarea", valor:t.descricao },
+      { nome:"cor", rotulo:"Cor da linha", tipo:"cor", valor:t.cor },
+    ]);
+    if(!v) return; Object.assign(t, v); return salvarTrilha(t);
+  }
+  if(acao === "excluir-trilha"){
+    if(!confirm(`Excluir a trilha "${t.titulo}" com todas as aulas? Não tem como desfazer.`)) return;
+    S.atualId = null; return apagarTrilha(t.id);
+  }
+  if(acao === "mover-trilha"){
+    const ord = [...S.trilhas].sort((a,b) => (a.ordem||0) - (b.ordem||0));
+    const i = ord.findIndex(x => x.id === t.id), j = i + Number(ds.dir);
+    if(j < 0 || j >= ord.length) return;
+    const outra = clone(ord[j]); const a = t.ordem || i, b = outra.ordem || j;
+    t.ordem = b; outra.ordem = a === b ? b - Number(ds.dir) : a;
+    await salvarTrilha(outra); return salvarTrilha(t);
+  }
+  if(acao === "novo-modulo"){
+    const v = await formulario("Novo módulo", [{ nome:"titulo", rotulo:"Nome do módulo", placeholder:"Ex.: Spring Boot Parte 1", obrigatorio:true }], "Criar módulo");
+    if(!v || !v.titulo) return; t.modulos.push({ id: novoId(), titulo: v.titulo, aulas: [] }); return salvarTrilha(t);
+  }
+  if(acao === "editar-modulo"){
+    const m = acharMod(ds.mod);
+    const v = await formulario("Renomear módulo", [{ nome:"titulo", rotulo:"Nome do módulo", valor:m.titulo, obrigatorio:true }]);
+    if(!v || !v.titulo) return; m.titulo = v.titulo; return salvarTrilha(t);
+  }
+  if(acao === "excluir-modulo"){
+    const m = acharMod(ds.mod);
+    if(!confirm(`Excluir o módulo "${m.titulo}" e suas ${m.aulas.length} aulas?`)) return;
+    t.modulos = t.modulos.filter(x => x.id !== m.id); return salvarTrilha(t);
+  }
+  if(acao === "mover-modulo"){
+    const i = t.modulos.findIndex(m => m.id === ds.mod), j = i + Number(ds.dir);
+    if(j < 0 || j >= t.modulos.length) return;
+    [t.modulos[i], t.modulos[j]] = [t.modulos[j], t.modulos[i]]; return salvarTrilha(t);
+  }
+  if(acao === "nova-aula" || acao === "editar-aula"){
+    const pos = acao === "editar-aula" ? acharPos(ds.aula) : null;
+    const a = pos ? pos.m.aulas[pos.i] : { id: novoId() };
+    const v = await formulario(pos ? "Editar aula" : "Nova aula", [
+      { nome:"titulo", rotulo:"Título", valor:a.titulo, obrigatorio:true },
+      { nome:"url", rotulo:"Link do YouTube", valor:a.url, placeholder:"https://www.youtube.com/watch?v=..." },
+      { nome:"materiais", rotulo:"Materiais", tipo:"textarea", valor:materiaisTxt(a.materiais), placeholder:"Slides | https://...\nRepositório | https://github.com/...", ajuda:"Um por linha, no formato Título | link" },
+      { nome:"notas", rotulo:"Anotações", tipo:"textarea", valor:a.notas, placeholder:"Dicas, pontos de atenção, exercício para fazer depois" },
+    ]);
+    if(!v || !v.titulo) return;
+    Object.assign(a, { titulo: v.titulo, url: v.url, notas: v.notas, materiais: parseMateriais(v.materiais) });
+    if(!pos) acharMod(ds.mod).aulas.push(a);
+    return salvarTrilha(t);
+  }
+  if(acao === "excluir-aula"){
+    const pos = acharPos(ds.aula); if(!confirm(`Excluir a aula "${pos.m.aulas[pos.i].titulo}"?`)) return;
+    pos.m.aulas.splice(pos.i, 1); return salvarTrilha(t);
+  }
+  if(acao === "mover-aula"){
+    const pos = acharPos(ds.aula), j = pos.i + Number(ds.dir);
+    if(j < 0 || j >= pos.m.aulas.length) return;
+    [pos.m.aulas[pos.i], pos.m.aulas[j]] = [pos.m.aulas[j], pos.m.aulas[pos.i]]; return salvarTrilha(t);
+  }
+  if(acao === "importar"){
+    const v = await formulario("Colar lista de aulas", [
+      { nome:"lista", rotulo:"Lista", tipo:"textarea",
+        placeholder:"# Spring Boot Parte 1\nO que é Spring Boot | https://youtu.be/xxxx\nCriando o projeto | https://youtu.be/yyyy\n# Spring Boot Parte 2\n...",
+        ajuda:"Linha com # cria um módulo novo. As outras linhas são aulas: Título | link. Aulas antes do primeiro # vão para o último módulo." },
+    ], "Importar");
+    if(!v || !v.lista) return;
+    let atual = t.modulos[t.modulos.length - 1], cont = 0;
+    for(const linha of v.lista.split("\n").map(l => l.trim()).filter(Boolean)){
+      if(linha.startsWith("#")){ atual = { id: novoId(), titulo: linha.replace(/^#+/, "").trim() || "Módulo", aulas: [] }; t.modulos.push(atual); continue; }
+      if(!atual){ atual = { id: novoId(), titulo: "Módulo 1", aulas: [] }; t.modulos.push(atual); }
+      const partes = linha.split("|").map(s => s.trim());
+      const url = partes.length > 1 ? partes[partes.length - 1] : (urlSegura(partes[0]) ? partes[0] : "");
+      const titulo = partes.length > 1 ? partes.slice(0, -1).join(" | ") : (url ? "Aula " + (atual.aulas.length + 1) : partes[0]);
+      atual.aulas.push({ id: novoId(), titulo, url, materiais: [], notas: "" }); cont++;
+    }
+    await salvarTrilha(t); toast(`${cont} aulas importadas`); return;
+  }
+}
+
+/* ---------- eventos ---------- */
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-acao]"); if(!b) return;
+  const acao = b.dataset.acao, ds = b.dataset;
+  if(acao === "ir-trilha"){ S.atualId = ds.id; lsSet(LS_ATUAL, ds.id); render(); window.scrollTo({ top: 0 }); return; }
+  if(acao === "baixar"){ baixarConteudo(); return; }
+  if(acao === "descartar"){ descartarRascunho(); return; }
+  if(acao === "abrir"){ abrirPainel(ds.aula); return; }
+  if(acao === "fechar"){ fecharPainel(); return; }
+  if(acao === "ver-aqui"){ S.verAqui = !S.verAqui; renderPainel(); return; }
+  if(acao === "concluir"){ concluir(ds.aula, b); return; }
+  if(acao === "fechar-festa"){ document.getElementById("festa").classList.remove("on"); return; }
+  if(acao === "toggle-edit"){ S.editando = !S.editando; render(); return; }
+  if(S.admin) acaoAdmin(acao, ds);
+});
+document.getElementById("veu").addEventListener("click", fecharPainel);
+document.addEventListener("keydown", e => {
+  if(e.key !== "Escape") return;
+  const f = document.getElementById("festa"); if(f.classList.contains("on")){ f.classList.remove("on"); return; }
+  if(S.aulaAberta && !document.getElementById("dlg").open) fecharPainel();
+});
+
+/* ---------- início ---------- */
+function ordenar(lista){ return lista.sort((a,b) => (a.ordem||0) - (b.ordem||0)); }
+async function carregarPublicado(){
+  try{
+    const r = await fetch("conteudo.json", { cache: "no-store" });
+    if(!r.ok) throw new Error(r.status);
+    const j = await r.json(); S.trilhas = ordenar(j.trilhas || []);
+  }catch(e){ S.trilhas = []; if(!S.admin) toast("Não achei o conteudo.json do site."); }
+}
+async function iniciar(){
+  S.admin = new URLSearchParams(location.search).has("admin");
+  render();
+  const rasc = S.admin ? lsGet(LS_RASCUNHO, null) : null;
+  if(rasc){ S.trilhas = ordenar(rasc.trilhas || []); S.rascunho = true; }
+  else await carregarPublicado();
+  S.modo = "pronto"; render();
+}
+iniciar();
+</script>
+</body>
+</html>

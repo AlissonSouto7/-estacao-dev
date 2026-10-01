@@ -1,0 +1,2187 @@
+{
+  "versao": 1,
+  "trilhas": [
+    {
+      "id": "s5stxg29sdcw",
+      "titulo": "Lógica de Programação",
+      "sigla": "LP",
+      "descricao": "Lógica e algoritmos construindo um jogo de Pong no Scratch, sem instalar nada.",
+      "cor": "#2E86AB",
+      "ordem": 1,
+      "modulos": [
+        {
+          "id": "7n114xl5zl7c",
+          "titulo": "Algoritmos com Scratch: o jogo Pong",
+          "aulas": [
+            {
+              "id": "1tk92ytexx0j",
+              "titulo": "Jornada do conhecimento - O início",
+              "url": "https://youtu.be/O40XUMbD7rw",
+              "materiais": [],
+              "notas": "Duração: 04:27"
+            },
+            {
+              "id": "p1uaia0dfgl5",
+              "titulo": "Preparando o Ambiente",
+              "url": "https://youtu.be/M97zO7rrrYA",
+              "materiais": [],
+              "notas": "Duração: 04:04"
+            },
+            {
+              "id": "ufofkida9m2f",
+              "titulo": "Acessar Scratch e Introdução ao Pong",
+              "url": "https://youtu.be/84nBYXJDn1Y",
+              "materiais": [
+                {
+                  "titulo": "Scratch (editor online)",
+                  "url": "https://scratch.mit.edu/projects/editor/"
+                }
+              ],
+              "notas": "Duração: 04:04"
+            },
+            {
+              "id": "ek0s6xgx5lh6",
+              "titulo": "Pintando cenário",
+              "url": "https://youtu.be/53ImIU0pMus",
+              "materiais": [],
+              "notas": "Duração: 02:00"
+            },
+            {
+              "id": "1zx3ibk6ugg1",
+              "titulo": "Desenhando a Bolinha",
+              "url": "https://youtu.be/wgvGubr3OWA",
+              "materiais": [],
+              "notas": "Duração: 04:38"
+            },
+            {
+              "id": "mmqwshhdvf1p",
+              "titulo": "Movimenta a bolinha",
+              "url": "https://youtu.be/PA8osUNOeC4",
+              "materiais": [],
+              "notas": "Duração: 06:56"
+            },
+            {
+              "id": "0qq1haf5oobk",
+              "titulo": "Desenha e Movimenta Raquete",
+              "url": "https://youtu.be/b-A9XdN10gU",
+              "materiais": [],
+              "notas": "Duração: 11:57"
+            },
+            {
+              "id": "wwg8ojxx1r8g",
+              "titulo": "Checa colisão de Bolinha com Raquete",
+              "url": "https://youtu.be/lVFPLlWA91I",
+              "materiais": [],
+              "notas": "Duração: 04:55"
+            },
+            {
+              "id": "ovdehk42n4qz",
+              "titulo": "Desenha, movimenta e checa colisão da Raquete Inimiga",
+              "url": "https://youtu.be/qlUi0P2kqCE",
+              "materiais": [],
+              "notas": "Duração: 09:13"
+            },
+            {
+              "id": "nmpj7qupcg6s",
+              "titulo": "Implementa inteligência para Raquete Inimiga",
+              "url": "https://youtu.be/OkR89xxOwe0",
+              "materiais": [],
+              "notas": "Duração: 11:46"
+            },
+            {
+              "id": "39gozvhckflv",
+              "titulo": "Possibilita erro para inteligência da Raquete Inimiga",
+              "url": "https://youtu.be/wNHL7eWp5dw",
+              "materiais": [],
+              "notas": "Duração: 05:16"
+            },
+            {
+              "id": "jz6xxyseux37",
+              "titulo": "Implementa Placar do Pong",
+              "url": "https://youtu.be/Sup3vNaoOPo",
+              "materiais": [],
+              "notas": "Duração: 09:50"
+            },
+            {
+              "id": "25k7x7v4rgeu",
+              "titulo": "Conclusão",
+              "url": "https://youtu.be/2nc3Sj9wU84",
+              "materiais": [],
+              "notas": "Duração: 02:24"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "uzo9998djfoa",
+      "titulo": "Revisão Java",
+      "sigla": "JV",
+      "descricao": "Do primeiro programa até orientação a objetos, exceções, coleções e Java 8.",
+      "cor": "#E4572E",
+      "ordem": 2,
+      "modulos": [
+        {
+          "id": "jjwnhzpc4yle",
+          "titulo": "Java parte 1: Primeiros passos",
+          "aulas": [
+            {
+              "id": "4gc4sr35ig02",
+              "titulo": "Introdução e Dicas para quem está Começando",
+              "url": "https://youtu.be/LnORjqZUMIQ",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "wixbd2vo0rx3",
+              "titulo": "Instalando o Java no Windows 10",
+              "url": "https://youtu.be/CMHU5buXvNw",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "kx12aayow33s",
+              "titulo": "Instalando o Java no Ubuntu (Linux)",
+              "url": "https://youtu.be/BTNp4P12DIs",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "7trgoq60kak5",
+              "titulo": "Primeiro Programa em Java",
+              "url": "https://youtu.be/mu2ti43cgwc",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "x2zr8bn4yiyj",
+              "titulo": "Entendendo os Erros",
+              "url": "https://youtu.be/NoEoOaTSFMo",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "sm9atn4cwhw1",
+              "titulo": "Instalando uma IDE (Eclipse e Netbeans) no Windows, Ubuntu e MacOS",
+              "url": "https://youtu.be/74QEhBpzixs",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        },
+        {
+          "id": "81q8y5oao78x",
+          "titulo": "Java parte 2: Introdução à Orientação a Objetos",
+          "aulas": [
+            {
+              "id": "kfnalvl2sdjn",
+              "titulo": "Introdução à Orientação a Objetos",
+              "url": "https://youtu.be/KUUrrIX6wGo",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "k1nz0gg9bivt",
+              "titulo": "Introdução a Variáveis",
+              "url": "https://youtu.be/ELBqT_rueAQ",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "vn5uhd7asle9",
+              "titulo": "Variáveis - Tipos Primitivos",
+              "url": "https://youtu.be/aqiB58NpKLw",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "x3z1ijb0mqc5",
+              "titulo": "Lendo dados do teclado usando a classe Scanner",
+              "url": "https://youtu.be/Z6Y8zupCKfk",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "qvebv0ijlwtp",
+              "titulo": "Operadores (Aritméticos, Lógicos e Relacionais)",
+              "url": "https://youtu.be/199tKAE6sxo",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "2uk9zyjx8rnl",
+              "titulo": "Condicionais If-Else",
+              "url": "https://youtu.be/KJYSXTYgL_o",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "zqgxuaqb2fuq",
+              "titulo": "Condicional Switch-Case",
+              "url": "https://youtu.be/JTLgFZyBUN4",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "05ap0gdmzypw",
+              "titulo": "Loops while e do-while",
+              "url": "https://youtu.be/9_12LPVMJYc",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "c6qj7vzatbdj",
+              "titulo": "Loop for",
+              "url": "https://youtu.be/HrfWrbmFUKQ",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "or1w1o54yapg",
+              "titulo": "Comandos Break e Continue",
+              "url": "https://youtu.be/rU-DCmwAtXE",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "i9bi91w7y23z",
+              "titulo": "Vetores (Arrays)",
+              "url": "https://youtu.be/HxRb5KLofcI",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "esmpy5vaythk",
+              "titulo": "Matrizes (Arrays Multidimensionais) - Parte 1",
+              "url": "https://youtu.be/P66G0rxdL-k",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "d1lbctgqnk1w",
+              "titulo": "Matrizes (Arrays Multidimensionais) - Parte 2",
+              "url": "https://youtu.be/C6lhdwDo2Ng",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "ne56ztjwxscq",
+              "titulo": "Matrizes (Arrays Multidimensionais) - Parte 3",
+              "url": "https://youtu.be/99u1tAbYcww",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "w9wezkuxsx6z",
+              "titulo": "Matrizes (Arrays Multidimensionais) - Parte 4",
+              "url": "https://youtu.be/QjSlHLMaTYY",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "otbl4tfwa850",
+              "titulo": "Loop for each",
+              "url": "https://youtu.be/2ndBbnsqBXQ",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "yhijg8nbtaeu",
+              "titulo": "Como debugar no Eclipse",
+              "url": "https://youtu.be/kbzzlKfjR8k",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "puza1mv0kypw",
+              "titulo": "Classes e atributos",
+              "url": "https://youtu.be/Gq1BS63pkRA",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "3fhgxwmq89di",
+              "titulo": "Classes e métodos simples",
+              "url": "https://youtu.be/-t_c6F_Uoeg",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "4tz758x3azuj",
+              "titulo": "Classes e métodos com retorno",
+              "url": "https://youtu.be/_3fal2H8Agw",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "o6po0mg3g2ja",
+              "titulo": "Classes e métodos com parâmetros",
+              "url": "https://youtu.be/ffvsI9dnDiY",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "oinljgxduyu5",
+              "titulo": "Pacotes e import",
+              "url": "https://youtu.be/aRQHjfYBpM8",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "8w1x2ttmc1t8",
+              "titulo": "Construtores",
+              "url": "https://youtu.be/uJKcKzro9pU",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "36j04cgspbv8",
+              "titulo": "Palavra chave this",
+              "url": "https://youtu.be/RLzR--Pwvcs",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "z583gt8xq4g1",
+              "titulo": "Modificadores private e public",
+              "url": "https://youtu.be/6oD7TE90e-M",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "anvv7kdsr4n9",
+              "titulo": "Encapsulamento: métodos getters e setters",
+              "url": "https://youtu.be/vKif9IxYTLY",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "rk17dp1tnol8",
+              "titulo": "Sobrecarga de métodos e construtores (overload)",
+              "url": "https://youtu.be/ZpssJov_5_A",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "bhneefz0jvtq",
+              "titulo": "Variáveis e métodos estáticos (modificador static)",
+              "url": "https://youtu.be/Dz_w4YpFL80",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "p3cnwd24dim1",
+              "titulo": "Recursividade",
+              "url": "https://youtu.be/X56_FjmbmE4",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "i50obuis8n92",
+              "titulo": "Relacionamento entre Classes (tem um e tem muitos)",
+              "url": "https://youtu.be/edXQiFAdH2c",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        },
+        {
+          "id": "2pdd97ycirpj",
+          "titulo": "Java parte 3: Entendendo herança e interface",
+          "aulas": [
+            {
+              "id": "jay4nzj47dg4",
+              "titulo": "Herança",
+              "url": "https://youtu.be/MOXLCjL4Ik4",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "w8evlfdi5nc7",
+              "titulo": "Herança: Palavra chave super",
+              "url": "https://youtu.be/aRPal-8z4RQ",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "t7ng14n2l6yr",
+              "titulo": "Herança: modificadores de acesso + protected",
+              "url": "https://youtu.be/xjxDh9xbfLM",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "4xy10jwnrae3",
+              "titulo": "Herança e Polimorfismo: sobrecarga de métodos",
+              "url": "https://youtu.be/pMPlngyWHLM",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "ewfzhxvknzjt",
+              "titulo": "Herança: classes abstratas",
+              "url": "https://youtu.be/Oibb-17nD14",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "3zvbr2judpgb",
+              "titulo": "Palavra chave final",
+              "url": "https://youtu.be/858FJ6DQRVg",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "7schzuwvpzbz",
+              "titulo": "Classe Object",
+              "url": "https://youtu.be/dAGvL88bO9o",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "m79lt177vxcg",
+              "titulo": "Interfaces",
+              "url": "https://youtu.be/6uLLfRNgRA4",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "04kh38lp30nf",
+              "titulo": "Casting e instanceof",
+              "url": "https://youtu.be/POEf8DKZWds",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "qxonjo0lef08",
+              "titulo": "Interface e herança",
+              "url": "https://youtu.be/h-R4mWzmRKc",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "o2tfmbbobd12",
+              "titulo": "Enumeradores (Enum)",
+              "url": "https://youtu.be/EdEKx24xHGc",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "xh76hwnffqsx",
+              "titulo": "Enumeradores como classe (construtor e métodos)",
+              "url": "https://youtu.be/eTtArKB24pc",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        },
+        {
+          "id": "2u44clxt7z42",
+          "titulo": "Java parte 4: Entendendo exceções",
+          "aulas": [
+            {
+              "id": "68sb57lcmy5r",
+              "titulo": "Try, catch",
+              "url": "https://youtu.be/ld2C4GcAtsg",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "e9gozzh7qbnt",
+              "titulo": "Múltiplos catch",
+              "url": "https://youtu.be/G8-fhwpHdFU",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "fl2f73wilkq7",
+              "titulo": "Finally",
+              "url": "https://youtu.be/Xb9rK6L4GYA",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "45l3s3scnw9k",
+              "titulo": "Stacktrace e throws",
+              "url": "https://youtu.be/CW7DER5TqLM",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "lnmrgs2zp6dy",
+              "titulo": "Tipos de erros no Java",
+              "url": "https://youtu.be/5R8pw1V2H-g",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "3b3ljm2npegk",
+              "titulo": "Criando sua própria exceção",
+              "url": "https://youtu.be/Xt0CpwJT5yY",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        },
+        {
+          "id": "nnqzdspmuk2v",
+          "titulo": "Java parte 5: Pacotes e java.lang",
+          "aulas": [
+            {
+              "id": "wm7ftz8e709h",
+              "titulo": "Classes Utilitárias - Strings pt 01",
+              "url": "https://youtu.be/vH7izlkNewI",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "lw2hbiymlf98",
+              "titulo": "Classes Utilitárias - Strings pt 02",
+              "url": "https://youtu.be/5hfftQx_S8Q",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "ao5o8bcnhjb9",
+              "titulo": "Classes Utilitárias - Strings pt 03 - Desempenho",
+              "url": "https://youtu.be/yx8OJVgVSU8",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "oiusgo29m28t",
+              "titulo": "Classes Utilitárias - Strings pt 04 - StringBuilder",
+              "url": "https://youtu.be/JAKcK93hHHU",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "yoznoi82xc85",
+              "titulo": "Sobrescrita do método toString",
+              "url": "https://youtu.be/62qcGF6IVfc",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "qlinb57or89f",
+              "titulo": "String: modificando uma String (substring, concat, replace, trim)",
+              "url": "https://youtu.be/Vug89Ou6iSs",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "arn2ho2c1wqm",
+              "titulo": "String: juntando e separando String (join, split)",
+              "url": "https://youtu.be/0wTeI-mQE6Y",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "mxxnijhhbxxy",
+              "titulo": "Concatenação com StringBuilder e StringBuffer",
+              "url": "https://youtu.be/2GFp7URJyoo",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        },
+        {
+          "id": "kgy5qogl5gza",
+          "titulo": "Java parte 6: Conhecendo o java.util",
+          "aulas": [
+            {
+              "id": "1shgs6a8bt9y",
+              "titulo": "Associação pt 01 - Arrays com Objetos",
+              "url": "https://youtu.be/HOjV9M6pRQQ",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "90nwl6pq9xqb",
+              "titulo": "Wrappers: classes de tipos primitivos",
+              "url": "https://youtu.be/U0dcVFvJIhk",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "ra3ddtk530xv",
+              "titulo": "Classes aninhadas: internas, locais e anônimas",
+              "url": "https://youtu.be/OQKV3dCKzSI",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "qg5eofxhb13c",
+              "titulo": "Como usar ArrayList no Java",
+              "url": "https://youtu.be/FeLl_JsjRSo",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "4wjemeyed4tz",
+              "titulo": "Entendendo o equals e hashCode",
+              "url": "https://youtu.be/AbRfF3yHB_Y",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        },
+        {
+          "id": "i66xcidlkiba",
+          "titulo": "Java 8: Tire proveito dos novos recursos da linguagem",
+          "aulas": [
+            {
+              "id": "h0gird7z9vh9",
+              "titulo": "Entenda FACILMENTE funções LAMBDA do JAVA 8, a principal novidade!",
+              "url": "https://youtu.be/lbCYLgoVpfQ",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "uv92e2w7te6g",
+              "titulo": "REDUZA uso de 'for', use STREAMS e simplifique seu código! - Parte 1",
+              "url": "https://youtu.be/bTlS_BdS41w",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "oohd8mzcxmf8",
+              "titulo": "REDUZA uso de 'for', use STREAMS e simplifique seu código! - Parte 2",
+              "url": "https://youtu.be/1febjDMVMnc",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "zbjmcfw33ejo",
+              "titulo": "Pare de retornar NULL, use OPTIONAL do JAVA 8!",
+              "url": "https://youtu.be/hmU2QEEc4sU",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "mt6ask9na9nl",
+              "titulo": "Aprenda a fazer REDUCE em STREAMS do JAVA 8!",
+              "url": "https://youtu.be/2aHElyENpuM",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "qra50vou7wi7",
+              "titulo": "Aprenda a fazer COLLECT em STREAMS, a EVOLUÇÃO DO REDUCE!",
+              "url": "https://youtu.be/mTbh9d2orcU",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "k91yvzks1114",
+              "titulo": "VOCÊ sabe TODAS as formas de escrever uma função LAMBDA?!",
+              "url": "https://youtu.be/PFB3QnvDikc",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "3uieuoziprks",
+              "titulo": "MÉTODOS podem ser FUNÇÕES LAMBDA no JAVA 8!",
+              "url": "https://youtu.be/9c561GQtyTs",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "vnrjv1vxok6s",
+              "titulo": "Faça DEBUG de STREAMS e funções LAMBDA no JAVA 8!",
+              "url": "https://youtu.be/lJjNDnqXUsw",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "r0uzky33ov95",
+              "titulo": "Aprenda STREAMS mais FÁCIL conhecendo as INTERFACES FUNCIONAIS!",
+              "url": "https://youtu.be/Ht0eto2mEpc",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "6uzae8ey10xx",
+              "titulo": "Crie STREAMS de QUALQUER COISA!",
+              "url": "https://youtu.be/GXfPBb-8YOE",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "zddt722t04a8",
+              "titulo": "Manipulando COLLECTIONS mais FÁCIL com LAMBDA!",
+              "url": "https://youtu.be/J_v0tq-T1lM",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "kg3vj9d76qmh",
+              "titulo": "ACELERE seus STREAMS! Torne-os PARALELOS!",
+              "url": "https://youtu.be/MPvZLz6Veac",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chr17i4to1xn",
+      "titulo": "Modelagem de Dados",
+      "sigla": "BD",
+      "descricao": "Modelagem relacional, normalização, SQL na prática e uma introdução ao MongoDB.",
+      "cor": "#2F9E64",
+      "ordem": 3,
+      "modulos": [
+        {
+          "id": "bbg6fnt7g3j4",
+          "titulo": "Entidades, relacionamentos e atributos",
+          "aulas": [
+            {
+              "id": "df8omn63ht7q",
+              "titulo": "Conceitos de Bancos de Dados",
+              "url": "https://youtu.be/Q_KTYFgvu1s",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "xvnnqzxv5c3e",
+              "titulo": "O Modelo Relacional - Introdução",
+              "url": "https://youtu.be/hGstS10kCPM",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "jpmutasf227a",
+              "titulo": "Modelos Conceitual, Lógico e Físico",
+              "url": "https://youtu.be/ZX7EuRWRdZg",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "3ny07yajw4z3",
+              "titulo": "Modelo Entidade-Relacionamento e Diagrama ER",
+              "url": "https://youtu.be/W2Z1STnjNJo",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "q6oflj28hkoy",
+              "titulo": "O que são Entidades",
+              "url": "https://youtu.be/poeUGQl52YI",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "lwj4v7hmkrc8",
+              "titulo": "O que são Atributos",
+              "url": "https://youtu.be/59TZc_vRpcQ",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        },
+        {
+          "id": "602g2bbpy0rd",
+          "titulo": "Relacionamentos e Cardinalidade",
+          "aulas": [
+            {
+              "id": "f8gfcdzf67u9",
+              "titulo": "Comparando Entidades e Relações",
+              "url": "https://youtu.be/CdbYZGEClLg",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "981l5rs8jp4j",
+              "titulo": "O que são Relacionamentos",
+              "url": "https://youtu.be/KSw0rTGEwPI",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "ahq180kqu12l",
+              "titulo": "Chave Primária, Estrangeira e outras",
+              "url": "https://youtu.be/sbIT5UXTEg8",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "ahb7uj7kwbqf",
+              "titulo": "O que são Cardinalidades",
+              "url": "https://youtu.be/OVBFFe4-jSM",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "3deaz6ftuvv1",
+              "titulo": "Restrições de Integridade",
+              "url": "https://youtu.be/BurdDn16ZgE",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "x2fpttr71mpm",
+              "titulo": "Diagramação - Notações Gráficas",
+              "url": "https://youtu.be/9plIQlzzPHA",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "xj6vxijzm5sz",
+              "titulo": "Dicionário de Dados",
+              "url": "https://youtu.be/-DESqE_GdEA",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        },
+        {
+          "id": "rnmnikkdp92i",
+          "titulo": "Normalização",
+          "aulas": [
+            {
+              "id": "jzf9ryz73lhy",
+              "titulo": "Dependências (Funcional, Multivalorada, Transitiva)",
+              "url": "https://youtu.be/koe4GVN_83M",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "8jyal56hmtvi",
+              "titulo": "Normalização e Anomalias - Conceitos",
+              "url": "https://youtu.be/NpG1Xt8LB_c",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "ovuoxh4j9xt9",
+              "titulo": "Normalização - Primeira Forma Normal",
+              "url": "https://youtu.be/eRaAMNjCFYw",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "54zzq8c9uo9m",
+              "titulo": "Normalização - Segunda Forma Normal",
+              "url": "https://youtu.be/6ER9lWOk-cY",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "ey2el0ik04cv",
+              "titulo": "Normalização - Terceira Forma Normal",
+              "url": "https://youtu.be/usA8QKvEHWw",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "eo2c6ddlmcax",
+              "titulo": "Normalização - Forma Normal de Boyce-Codd",
+              "url": "https://youtu.be/o6mSiTO-vak",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        },
+        {
+          "id": "7iz6qecszxlo",
+          "titulo": "Projeto prático",
+          "aulas": [
+            {
+              "id": "lb68px8568f7",
+              "titulo": "Apresentação e Regras do Negócio",
+              "url": "https://youtu.be/hsQJAdWksMI",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "gceyo6a3tvs1",
+              "titulo": "Identificando Entidades, Atributos e Relacionamentos",
+              "url": "https://youtu.be/Q47k7uS3bIg",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "vmvd9gmbviaw",
+              "titulo": "Ferramenta brModelo para criação de DER",
+              "url": "https://youtu.be/AFZSRj65_hQ",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "cbtgj4ahyynz",
+              "titulo": "Diagrama Entidade-Relacionamento - 01",
+              "url": "https://youtu.be/eWz0SLgJWxc",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "bevqaiwhgsvc",
+              "titulo": "Acrescentando os Atributos ao DER",
+              "url": "https://youtu.be/kTLDf_wdruw",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "yqdf3064nn04",
+              "titulo": "Calculando as Cardinalidades no DER",
+              "url": "https://youtu.be/MXvSHSv6i34",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "o7j57qts8mt9",
+              "titulo": "Eliminando Relacionamentos Muitos-para-Muitos",
+              "url": "https://youtu.be/Ln7MeGiCtkI",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "5rkyp7mn9w8d",
+              "titulo": "Criando o Dicionário de Dados",
+              "url": "https://youtu.be/4eNpLA34Izo",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "dyzo2i23ssj2",
+              "titulo": "Derivando o Modelo Lógico",
+              "url": "https://youtu.be/VJCR-MNrOAY",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "h79miqfakcfc",
+              "titulo": "Normalização - Primeira Forma Normal",
+              "url": "https://youtu.be/AsK2sYhaGMY",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "r2u7xqy23kog",
+              "titulo": "Normalização - Segunda Forma Normal",
+              "url": "https://youtu.be/-2xK-fkqagI",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "hl69x0ivn0r6",
+              "titulo": "Normalização - Terceira Forma Normal",
+              "url": "https://youtu.be/XhLmF3-Ew8c",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "ygxqghzk4k3e",
+              "titulo": "Dicionário de Dados e Ajustes Finais",
+              "url": "https://youtu.be/6LCus-I0juA",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "bf4kugc15dur",
+              "titulo": "Implementação do Banco de Dados",
+              "url": "https://youtu.be/c7r8t4qYWS0",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "oa9ac5ld504o",
+              "titulo": "Testes Finais no Banco de Dados",
+              "url": "https://youtu.be/XLAEHJg_5YQ",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "q3pvm4ulwfs5",
+              "titulo": "Recursos para Estudo e Finalização do Curso",
+              "url": "https://youtu.be/B14xfl5wVrU",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "tkhomr94p3pu",
+              "titulo": "12 dicas de Boas Práticas em Modelagem de Dados",
+              "url": "https://youtu.be/ppA649f48e8",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        },
+        {
+          "id": "2b5uyb6jog1x",
+          "titulo": "Entendendo SQL",
+          "aulas": [
+            {
+              "id": "yxhlztwd6rgz",
+              "titulo": "O que é um Banco de Dados?",
+              "url": "https://youtu.be/Ofktsne-utM",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "l77oi099xuq3",
+              "titulo": "Instalando o MySQL com WAMP",
+              "url": "https://youtu.be/5JbAOWJbgIA",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "t20cu5p5q0nc",
+              "titulo": "Instalando o XAMPP",
+              "url": "https://youtu.be/R2HrwSQ6EPM",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "dsftlvlx55yw",
+              "titulo": "Criando o primeiro Banco de Dados",
+              "url": "https://youtu.be/m9YPlX0fcJk",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "8i32n6v0q05o",
+              "titulo": "Melhorando a Estrutura do Banco de Dados",
+              "url": "https://youtu.be/cHLKtALWDos",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "ks6zb4lnggv0",
+              "titulo": "Inserindo Dados na Tabela (INSERT INTO)",
+              "url": "https://youtu.be/NCG9niOlm40",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "8l0hlhmv2o7y",
+              "titulo": "Alterando a Estrutura da Tabela (ALTER TABLE e DROP TABLE)",
+              "url": "https://youtu.be/To9qUcEMuY0",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "t0a38xfprg0i",
+              "titulo": "Manipulando Linhas (UPDATE, DELETE e TRUNCATE)",
+              "url": "https://youtu.be/wXViczeTr6Q",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "8dqj3u0bet3b",
+              "titulo": "Gerenciando Cópias de Segurança MySQL",
+              "url": "https://youtu.be/w6OYS_M7hTM",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "9t6mwqwhtg8o",
+              "titulo": "PHPMyAdmin (Parte 1)",
+              "url": "https://youtu.be/OaPMvrA0cA4",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "ezcwtas33khi",
+              "titulo": "PHPMyAdmin (Parte 2)",
+              "url": "https://youtu.be/EC_1ZtXsUtA",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "5gcb5bi27df4",
+              "titulo": "SELECT (Parte 1)",
+              "url": "https://youtu.be/GaOlyL3Uv9M",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "fngypja2ud6m",
+              "titulo": "SELECT (Parte 2)",
+              "url": "https://youtu.be/q4hPo83-Buo",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "xz2bcd3vz2wt",
+              "titulo": "SELECT (Parte 3)",
+              "url": "https://youtu.be/ocyVJ9gRUaE",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "rgh7q8bfdary",
+              "titulo": "Modelo Relacional",
+              "url": "https://youtu.be/8fxKJWJcRTw",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "ozo3hctimd6a",
+              "titulo": "Chaves Estrangeiras e JOIN",
+              "url": "https://youtu.be/paZNDJAPT4E",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "su902bkqw869",
+              "titulo": "INNER JOIN com várias tabelas",
+              "url": "https://youtu.be/jx2ne8iZMOA",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        },
+        {
+          "id": "b0ofoomrvojj",
+          "titulo": "MongoDB - Banco NoSQL",
+          "aulas": [
+            {
+              "id": "xedgz8pwfkid",
+              "titulo": "Introdução",
+              "url": "https://youtu.be/kedLyo95fGU",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "b8c4ersxq8yr",
+              "titulo": "Cadastro MongoDB",
+              "url": "https://youtu.be/CfsDcd9nzSA",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "dzmc8wonkt5v",
+              "titulo": "Instalando a extensão MongoDB for VS Code",
+              "url": "https://youtu.be/zBkD1p2QZYQ",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "da76l2maokab",
+              "titulo": "Tipos de Dados no MongoDB",
+              "url": "https://youtu.be/UqElbd5KPaw",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "i7myez3rmy7t",
+              "titulo": "Insert no MongoDB",
+              "url": "https://youtu.be/aUZhS4Lf4fw",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "wtbqstl6zwig",
+              "titulo": "Select no MongoDB",
+              "url": "https://youtu.be/jaSX563nl64",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "j4ldquefzmgj",
+              "titulo": "Operadores",
+              "url": "https://youtu.be/PLle9BBrnVA",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "7v1pq1b06qyn",
+              "titulo": "Select no MongoDB (parte 2)",
+              "url": "https://youtu.be/P1JEILxuVas",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "rxkhgn6cz9uv",
+              "titulo": "Ordenação no MongoDB",
+              "url": "https://youtu.be/qqFtPQR_pbQ",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "4dfccdhqsjcr",
+              "titulo": "Update no MongoDB",
+              "url": "https://youtu.be/mzrVLVmRHDI",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "77bbiuj5hm7g",
+              "titulo": "Delete no MongoDB",
+              "url": "https://youtu.be/m7Wcb4uWtp0",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v29i01vuynrz",
+      "titulo": "Persistência com Java",
+      "sigla": "PJ",
+      "descricao": "Java conversando com banco: JDBC, JPA/Hibernate e Spring Data JPA.",
+      "cor": "#E0A526",
+      "ordem": 4,
+      "modulos": [
+        {
+          "id": "dp3qsuny6k3k",
+          "titulo": "Java e JDBC: Trabalhando com um banco de dados",
+          "aulas": [
+            {
+              "id": "azryhkvxo5ol",
+              "titulo": "Como fazer um CRUD Java com Mysql JDBC - Parte 01",
+              "url": "https://youtu.be/-2Qgpe7T5tc",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "i5r5lbh6xrm4",
+              "titulo": "Montando DAO Java para salvar um registro no banco de dados Mysql JDBC - Parte 02",
+              "url": "https://youtu.be/R44PXMAtIIo",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "pfb0i6s4g7cz",
+              "titulo": "Como salvar um registro no banco com Java JDBC - Parte 03",
+              "url": "https://youtu.be/XeBJGEZrbJw",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "26thswonshtw",
+              "titulo": "Como listar registros do banco de dados com Java JDBC - Parte 04",
+              "url": "https://youtu.be/kBtzipEWqu8",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "5be7k9m2zb6e",
+              "titulo": "Visualizando os dados do banco de dados CRUD - Parte 05",
+              "url": "https://youtu.be/_jQW9UvNC2g",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "okouw8oh7tt6",
+              "titulo": "Como fazer Update em Java CRUD - Parte 06",
+              "url": "https://youtu.be/iCu6-hnb19c",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "fp2s1fefgu7m",
+              "titulo": "Como fazer delete em Java CRUD - Parte 07",
+              "url": "https://youtu.be/CqrBolZO5D0",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        },
+        {
+          "id": "97nt500adjxm",
+          "titulo": "Java e JPA: Persistência com JPA - Hibernate",
+          "aulas": [
+            {
+              "id": "wo0qu9uyj43j",
+              "titulo": "Comece assim com JPA (Java Persistence API)",
+              "url": "https://youtu.be/MGWJbaYdy-Y",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "v2ag0dnh35zv",
+              "titulo": "Destrinchando a Java Persistence Query Language do JPA",
+              "url": "https://youtu.be/R225whFQjNA",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "ymdwsf1940jm",
+              "titulo": "Aprenda a fazer Joins em entidades JPA com JPQL",
+              "url": "https://youtu.be/2mH3vtFIqOQ",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "x4473dvzxfd0",
+              "titulo": "Guia para iniciantes em Criteria API do JPA",
+              "url": "https://youtu.be/9_FUc9Y_y4w",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        },
+        {
+          "id": "wk85i9tjnh63",
+          "titulo": "Java e JPA: consultas avançadas, performance e modelos complexos",
+          "aulas": [
+            {
+              "id": "vqrttdmwuftk",
+              "titulo": "Mapeando entidades JPA para geração de schema do banco de dados",
+              "url": "https://youtu.be/biJSf_WpFB4",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "qrpl4v97jr7p",
+              "titulo": "Consultas nativas com JPA",
+              "url": "https://youtu.be/bsZQRZx8prQ",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "qootdze4x7f4",
+              "titulo": "Chamando Stored Procedures com JPA",
+              "url": "https://youtu.be/mInb79CCrME",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "6pscb39iyoac",
+              "titulo": "Tutorial de mapeamento de relacionamentos com JPA",
+              "url": "https://youtu.be/ODXvvEzXlQY",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        },
+        {
+          "id": "tyuejd2lgrx4",
+          "titulo": "Spring Data JPA: Repositórios e Consultas",
+          "aulas": [
+            {
+              "id": "0xbj392k5wub",
+              "titulo": "Turbinando a camada de persistência com Spring Data JPA",
+              "url": "https://youtu.be/AzbydpkeHtk",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8hr45zovn2q7",
+      "titulo": "Back End: APIs com Spring",
+      "sigla": "SB",
+      "descricao": "HTTP, Maven, Spring Boot construindo uma API REST, além de Git e Scrum.",
+      "cor": "#7A5AF8",
+      "ordem": 5,
+      "modulos": [
+        {
+          "id": "ecbg6gnmu7ou",
+          "titulo": "HTTP: Entendendo a web por baixo dos panos",
+          "aulas": [
+            {
+              "id": "1jrj02ua87nb",
+              "titulo": "Entendendo o protocolo HTTP",
+              "url": "https://youtu.be/58939PsYO8Y",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "eo3ot81yc7yi",
+              "titulo": "Qual a diferença entre HTTP e HTTPS?",
+              "url": "https://youtu.be/e-Y_i7FsThA",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "1zlyyhv0msra",
+              "titulo": "Como funciona uma requisição HTTP?",
+              "url": "https://youtu.be/fhAXgcD21iE",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "3kqxmy3kx1tu",
+              "titulo": "Protocolo HTTP: o que é e como funciona",
+              "url": "https://youtu.be/e5OS6EPnN3w",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "yjl1ehk89dqu",
+              "titulo": "HTTPie: aprenda a usar essa ferramenta",
+              "url": "https://youtu.be/udca-FJma4g",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "xoezv1cfkpla",
+              "titulo": "Método GET do protocolo HTTP",
+              "url": "https://youtu.be/CVq0TN1DqU0",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "dsldc4oyph0l",
+              "titulo": "Idempotência: o que é e como o HTTP a usa",
+              "url": "https://youtu.be/-50uDb_hExw",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "0a97ec7bw83z",
+              "titulo": "Método POST do protocolo HTTP",
+              "url": "https://youtu.be/v2yXdMnRORQ",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "2cqrid9p8vkb",
+              "titulo": "Métodos DELETE e PUT do protocolo HTTP",
+              "url": "https://youtu.be/dagGES1XBfg",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        },
+        {
+          "id": "4tmknvnk28su",
+          "titulo": "Maven: Build do zero a web",
+          "aulas": [
+            {
+              "id": "z7dn5g5og65y",
+              "titulo": "Apache Maven para programadores Java iniciantes",
+              "url": "https://youtu.be/ZQICkNszEuI",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "7tt92i7vhait",
+              "titulo": "Como criar uma REST API com Spring Boot (tutorial passo a passo)",
+              "url": "https://youtu.be/9GWK9A79tEc",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        },
+        {
+          "id": "ghjzhovdf913",
+          "titulo": "Servlet: Fundamentos da programação web Java",
+          "aulas": [
+            {
+              "id": "xemm9xskgom5",
+              "titulo": "Introdução ao Servlet",
+              "url": "https://youtu.be/dIKMwVNqS-I",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "2cmjw7ntduli",
+              "titulo": "Java Server Pages (JSP)",
+              "url": "https://youtu.be/mrWxOAIEDx4",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        },
+        {
+          "id": "o84g2jgdj514",
+          "titulo": "Spring Boot Parte 1: Construa uma API Rest",
+          "aulas": [
+            {
+              "id": "un84fkhhnapw",
+              "titulo": "Introdução ao curso",
+              "url": "https://youtu.be/bCzsSXE4Jzg",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "58rnmbdut9lg",
+              "titulo": "O que é Spring Boot",
+              "url": "https://youtu.be/aspWYs8lp48",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "d518hrl49tyw",
+              "titulo": "Criando projeto na pedreiragem pt 01",
+              "url": "https://youtu.be/w8I7jWfUFLg",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "o77p9hxdy89y",
+              "titulo": "Criando projeto na pedreiragem pt 02",
+              "url": "https://youtu.be/szrqiHLbUq0",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "07s8wgui4hxh",
+              "titulo": "@Component, @Autowired, @SpringBootApplication",
+              "url": "https://youtu.be/4sndRmKpMYI",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "1lxkp3khp6xl",
+              "titulo": "Hot Swap com Spring Boot Devtools",
+              "url": "https://youtu.be/8W8t2yh8CD4",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "taam1lbg4yl5",
+              "titulo": "Gerando projeto com start.spring.io",
+              "url": "https://youtu.be/sZGw-evH0OE",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "foi0kwdtsi99",
+              "titulo": "Método GET parte 1",
+              "url": "https://youtu.be/ChstGsjYly0",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "svet7wsyfvdb",
+              "titulo": "Método GET parte 2",
+              "url": "https://youtu.be/6ykxjpFrnJE",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "b46h0hh39oyt",
+              "titulo": "Método POST",
+              "url": "https://youtu.be/Mqw16-koH-8",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "33wzv4pkwo5d",
+              "titulo": "Método DELETE",
+              "url": "https://youtu.be/yHHV_sr_gsI",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "ynpwz2kx9ja0",
+              "titulo": "Método PUT",
+              "url": "https://youtu.be/aJ43SfY8QKs",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "saubbi9e78av",
+              "titulo": "Instalando Docker e executando container MySQL",
+              "url": "https://youtu.be/ZPUC3wZgDoA",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "u9vy1iq9e9nv",
+              "titulo": "Spring Data JPA pt 01",
+              "url": "https://youtu.be/npW5nkMQ6Vs",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "acfzau9sx7es",
+              "titulo": "Spring Data JPA pt 02",
+              "url": "https://youtu.be/JRA5w6FSw0E",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "llpnpwa205gf",
+              "titulo": "Framework de Mapeamento MapStruct",
+              "url": "https://youtu.be/A9-Inky1Fjo",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "yfxz4x51e660",
+              "titulo": "Request Params",
+              "url": "https://youtu.be/juVa6LYSYKg",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "80nc8n368w0k",
+              "titulo": "Exceções Customizadas",
+              "url": "https://youtu.be/1CJPEhgrxOU",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "mchullu2f2fp",
+              "titulo": "Handler Global",
+              "url": "https://youtu.be/TpXirJnXa-8",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "bjfhctrtsvbn",
+              "titulo": "Transações",
+              "url": "https://youtu.be/zYz6zt3SNMQ",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "5fllgsv2u44j",
+              "titulo": "Validação de campos",
+              "url": "https://youtu.be/fatUfpFROSo",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "2goyo3su4q16",
+              "titulo": "Handler para validação de campos",
+              "url": "https://youtu.be/tRb_OscShmc",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "pw0tsg2dp30u",
+              "titulo": "Sobrescrevendo handler do Spring",
+              "url": "https://youtu.be/UgO1fdvOFBk",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "mvacxpbuofld",
+              "titulo": "Paginação",
+              "url": "https://youtu.be/ongEOYHl-6o",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "oulom0u58an4",
+              "titulo": "WebMvcConfigurer",
+              "url": "https://youtu.be/1_Bp3JFZ4Cs",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        },
+        {
+          "id": "oq90qaegwnpq",
+          "titulo": "Curso básico de Git e Github",
+          "aulas": [
+            {
+              "id": "d8xnlktwxl35",
+              "titulo": "Introdução - O que é git?",
+              "url": "https://youtu.be/2c7yWlpWDJM",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "wmpb6pfsahz8",
+              "titulo": "Conceitos básicos do git",
+              "url": "https://youtu.be/bZb0KiAbmNU",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "29cnvy7xio3l",
+              "titulo": "Instalação e configuração",
+              "url": "https://youtu.be/q9dnokwu7S8",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "7bm1p045k60z",
+              "titulo": "Criando repositórios",
+              "url": "https://youtu.be/Hw3ykxHHKiw",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "01edzh1xde3d",
+              "titulo": "Colocando arquivos no stage",
+              "url": "https://youtu.be/-PGHFtlEF0E",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "2g6yysy10jxe",
+              "titulo": "Fazendo commits",
+              "url": "https://youtu.be/n5WUYkkeCws",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "gpqfu8sjvoqp",
+              "titulo": "Desfazendo commit",
+              "url": "https://youtu.be/CAlg29rF2VY",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "d7ht3emzu8k0",
+              "titulo": "Ignorando arquivos",
+              "url": "https://youtu.be/pNLb7M-UzO8",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "1p13y2ypjetw",
+              "titulo": "Criando branches",
+              "url": "https://youtu.be/lq3nawUnpEI",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "bgb7j21jfs58",
+              "titulo": "Fundindo branches",
+              "url": "https://youtu.be/o5fm7l_e1Bc",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "lbgr39td90bc",
+              "titulo": "Resolvendo conflitos",
+              "url": "https://youtu.be/FSzHRPa-zl4",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "f75r8gzor8te",
+              "titulo": "Iniciando com Github",
+              "url": "https://youtu.be/uaWtCItNry8",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "koha0ghrj4ql",
+              "titulo": "Simulando múltiplos devs",
+              "url": "https://youtu.be/AQ5v4ZCG1h0",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "5uwjiig7zjt0",
+              "titulo": "Fazendo Pull Request (PR)",
+              "url": "https://youtu.be/RNbKd8cD0LI",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "qi19w7bhd1wq",
+              "titulo": "Fazendo Fork de um repositório",
+              "url": "https://youtu.be/n_GEGPuNNRA",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        },
+        {
+          "id": "gt3h0n09jah5",
+          "titulo": "Curso básico de Scrum",
+          "aulas": [
+            {
+              "id": "8lzmlugnnkmg",
+              "titulo": "Introdução ao Framework Scrum",
+              "url": "https://youtu.be/HcZVxsVZ-48",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "eh2zj1mfu38y",
+              "titulo": "Papéis, Artefatos e Cerimônias do Scrum",
+              "url": "https://youtu.be/vMiW1NruroM",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "ks6sl9eccu79",
+              "titulo": "Product Owner",
+              "url": "https://youtu.be/uzrp-kxp-8g",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "go2jcmbe01s3",
+              "titulo": "Scrum Master",
+              "url": "https://youtu.be/7FzQXQ4YOH4",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "3y399qpds3ux",
+              "titulo": "Time Scrum",
+              "url": "https://youtu.be/C0CKZvwVVZ0",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "rf31r94o5tt5",
+              "titulo": "Cerimônias do Scrum",
+              "url": "https://youtu.be/tcoE59j70cE",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "7rvq3tpq0cbu",
+              "titulo": "Planejamento da Sprint",
+              "url": "https://youtu.be/XwPS1PN0HgA",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "g2pf56dkrk1j",
+              "titulo": "Reunião Diária",
+              "url": "https://youtu.be/7DXD7WOShLM",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "uafv2rdpi08f",
+              "titulo": "Review da Sprint",
+              "url": "https://youtu.be/hgxTgqWlKDo",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "8y7utc4pj3io",
+              "titulo": "Retrospectiva",
+              "url": "https://youtu.be/elsnz468Vu4",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "v2rjnch0gjsc",
+              "titulo": "Product Backlog",
+              "url": "https://youtu.be/_EaPLRwhgE0",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "d7y94nubirgi",
+              "titulo": "User Stories",
+              "url": "https://youtu.be/MpNVGkI2RD4",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "bcwx620t473g",
+              "titulo": "Sistema Puxado",
+              "url": "https://youtu.be/CCwoCNAF9CY",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "slnp4jf5dm1x",
+              "titulo": "Kanban",
+              "url": "https://youtu.be/5IIxWyRwz0U",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "ol5gs03oiwpc",
+              "titulo": "Planning Poker",
+              "url": "https://youtu.be/O91-HP3Rel4",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "imqdfvb216hd",
+              "titulo": "Definition Of Done",
+              "url": "https://youtu.be/VddTXnafsjQ",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "g3mq8swqb1t6",
+              "titulo": "Burn Down",
+              "url": "https://youtu.be/5qiN9fQi8lc",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "rxekta8j2q60",
+              "titulo": "MVP (Produto Mínimo Viável)",
+              "url": "https://youtu.be/EuK8C3WJjlY",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vr51j3y1lxm8",
+      "titulo": "Java API: PostgreSQL",
+      "sigla": "PG",
+      "descricao": "PostgreSQL na prática com o banco Northwind: pgAdmin, psql, DDL e consultas.",
+      "cor": "#D6457F",
+      "ordem": 6,
+      "modulos": [
+        {
+          "id": "inf4pgz0z5iv",
+          "titulo": "ScriptSQL - PostgreSQL",
+          "aulas": [
+            {
+              "id": "bzucvbhww7os",
+              "titulo": "Como importar o banco educacional Northwind",
+              "url": "https://youtu.be/Wmg_JfwkODU",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "yrj5gmeaveni",
+              "titulo": "Como usar o pgAdmin 4 e criar o Northwind via scripts SQL",
+              "url": "https://youtu.be/uy01hojmvt0",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "9fxfgjt4njte",
+              "titulo": "Como restaurar corretamente o Northwind",
+              "url": "https://youtu.be/FIupByo4LlQ",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "mi4q9iipqncx",
+              "titulo": "Comandos DDL, DML, DCL e TCL: o que são e como usar",
+              "url": "https://youtu.be/9eIDBDvBxeA",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "ztwuridj7xxy",
+              "titulo": "DDL: Create e Drop database com PSQL",
+              "url": "https://youtu.be/18Q8RkyOwa8",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "co56oj2ox710",
+              "titulo": "Por que o DROP Database no PSQL não funciona e como resolver",
+              "url": "https://youtu.be/iy0lrMJTV3A",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "hqvxxjoiprj9",
+              "titulo": "DDL: apagando um database com DROP como um DBA",
+              "url": "https://youtu.be/Qcs2pE0YaIo",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "kz80zfxox3lh",
+              "titulo": "PgAdmin: conexão local a um PostgreSQL",
+              "url": "https://youtu.be/Z-CA88-2qwI",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "xbgqygbylos6",
+              "titulo": "PgAdmin: conexão remota a um PostgreSQL",
+              "url": "https://youtu.be/z1rGcfWL_3M",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "ih9ch16d2z4a",
+              "titulo": "PgAdmin: Graphical Query Builder",
+              "url": "https://youtu.be/Lcoh-q5Euwo",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "0hyg8f60gaxb",
+              "titulo": "PgAdmin: criar, copiar e restaurar um banco",
+              "url": "https://youtu.be/7HvTsLx8w0o",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "widx8rzxjqam",
+              "titulo": "Trigger before insert",
+              "url": "https://youtu.be/dhmE1jx8RAg",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "79m24n5v6f8f",
+              "titulo": "PgAdmin: criando um banco no PostgreSQL",
+              "url": "https://youtu.be/vIC8xnKiZmY",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "8vnusbett103",
+              "titulo": "PgAdmin: criando uma tabela",
+              "url": "https://youtu.be/-se1j6x0pQE",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "txgb766vdo8y",
+              "titulo": "PgAdmin: adicionando chave primária (PK)",
+              "url": "https://youtu.be/p9LUVzgnif8",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "p5qtl5wtwuj1",
+              "titulo": "PgAdmin: inserindo registros em tabelas",
+              "url": "https://youtu.be/oTHDZfG8Z5k",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "95gcmbzb0b98",
+              "titulo": "PgAdmin: script de Insert Into",
+              "url": "https://youtu.be/0ql0ZZ7WLUI",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "zba2z2r8a3vh",
+              "titulo": "PgAdmin: script de Select From",
+              "url": "https://youtu.be/6UndcESrp3s",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "mddcagwkteqx",
+              "titulo": "PgAdmin 4 x pgAdmin III: qual usar",
+              "url": "https://youtu.be/5aQOGcS0Yac",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "4fgvzdnomu4n",
+              "titulo": "PSQL: acessando qualquer banco pelo terminal",
+              "url": "https://youtu.be/uwQWrEvLzDQ",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "748qb21asxq6",
+              "titulo": "5 dicas de PSQL que todo DBA deve saber",
+              "url": "https://youtu.be/pv_adWu-xAg",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "k7ignqld0td2",
+              "titulo": "Como WHERE e ORDER BY podem degradar a performance",
+              "url": "https://youtu.be/geSzr_Jk9Gs",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "wgwncz7400hr",
+              "titulo": "Diagrama Entidade-Relacionamento na prática",
+              "url": "https://youtu.be/KvK8708cq0M",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "csk3pupc9jom",
+              "titulo": "SELECT em duas tabelas e análise de performance",
+              "url": "https://youtu.be/xGRVHrIkLlc",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "hfc2m5q1nnlc",
+              "titulo": "PgAdmin e psql: resetando a senha de usuário",
+              "url": "https://youtu.be/rixVu1VYHpE",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "cawe7q9jr53d",
+              "titulo": "Iniciar, parar e reiniciar o PostgreSQL no Linux",
+              "url": "https://youtu.be/3-tw30sHFSg",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "k99zo7aetij8",
+              "titulo": "Criando um novo banco e validando a criação",
+              "url": "https://youtu.be/G0jqtQ4tzjA",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "aikli86x0tfs",
+              "titulo": "Big Data com dados do IBGE: ETL com Python, CSV para SQL",
+              "url": "https://youtu.be/p2YzONYLJE8",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "4lh1wc1qak46",
+              "titulo": "Big Data com dados do IBGE: repositório do projeto",
+              "url": "https://youtu.be/ylkZIs27KaI",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "kpmahbq9g1yi",
+              "titulo": "DER em segundos com pgAdmin",
+              "url": "https://youtu.be/mDp_m7AOEGM",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "8thzrbmmhy00",
+              "titulo": "Consultas SQL para decisão gerencial",
+              "url": "https://youtu.be/8wBG3lEQ0qs",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "7mso5jkd2azg",
+              "titulo": "Consultando duas tabelas com WHERE",
+              "url": "https://youtu.be/45WtyVUFvXk",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "j33juky5mwh3",
+              "titulo": "INNER JOIN com duas tabelas",
+              "url": "https://youtu.be/U3aAf6kq9nQ",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "sykoqqb5rmu0",
+              "titulo": "PSQL: comandos de terminal no Linux",
+              "url": "https://youtu.be/tV58UyYN1hk",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "rlljjr0y2hfj",
+              "titulo": "Rodando scripts SQL pelo terminal",
+              "url": "https://youtu.be/sSCzolYqYiE",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "evek5dhi4jlt",
+              "titulo": "PostgreSQL com Docker e restore do Northwind por shell script",
+              "url": "https://youtu.be/QlnEyIXA5KI",
+              "materiais": [],
+              "notas": ""
+            },
+            {
+              "id": "t51syteitmo2",
+              "titulo": "Comandos PSQL do dia a dia de um DBA",
+              "url": "https://youtu.be/uXibFEnFeN4",
+              "materiais": [],
+              "notas": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
