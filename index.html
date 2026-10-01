@@ -3,726 +3,547 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Estação Dev</title>
+<meta name="theme-color" content="#282828">
+<title>estacao-dev</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23282828'/%3E%3Ctext x='5' y='22' font-family='monospace' font-weight='700' font-size='16' fill='%23B8BB26'%3E%3E_%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#E8EDF1; --surface:#FFFFFF; --surface-2:#F3F6F8; --ink:#15202B; --muted:#5A6A79; --rule:#CAD4DC;
-  --ok:#2F9E64; --warn:#C24A2C; --focus:#2E6BD8;
-  --l1:#E4572E; --l2:#2E86AB; --l3:#2F9E64; --l4:#E0A526; --l5:#7A5AF8; --l6:#D6457F;
-  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --body:"Figtree", "Segoe UI", system-ui, sans-serif;
-  color-scheme: light;
+  --bg:#282828;--bg0:#1D2021;--bg1:#3C3836;--bg2:#504945;--bg3:#665C54;
+  --fg:#EBDBB2;--gr:#928374;--yl:#FABD2F;--gn:#B8BB26;--aq:#8EC07C;--or:#FE8019;--rd:#FB4934;--bl:#83A598;--pu:#D3869B;
+  --mono:"JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#0E151E; --surface:#16202B; --surface-2:#1C2835; --ink:#E7EDF2; --muted:#93A3B2; --rule:#2B3948;
-    --ok:#4CC488; --warn:#F07A5A; --focus:#7FA8FF; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0E151E; --surface:#16202B; --surface-2:#1C2835; --ink:#E7EDF2; --muted:#93A3B2; --rule:#2B3948;
-  --ok:#4CC488; --warn:#F07A5A; --focus:#7FA8FF; color-scheme: dark;
-}
 *,*::before,*::after{box-sizing:inherit}
-html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
-button,input,textarea,select{font:inherit;color:inherit}
-button{cursor:pointer}
-:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
-a{color:inherit}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--fg);font:14px/1.55 var(--mono);overflow:hidden}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+a{color:var(--bl)}
+:focus-visible{outline:2px solid var(--yl);outline-offset:-2px}
+::selection{background:var(--bg2)}
+#app{height:100%}
 
-/* topo */
-.topo{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:14px 24px;border-bottom:1px solid var(--rule);background:var(--surface);position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
-.marca{font-family:var(--display);font-weight:800;font-size:1.35rem;letter-spacing:-.02em;display:flex;align-items:center;gap:10px;margin-right:auto}
-.marca svg{flex:none}
-.jogador{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-.nivel{display:flex;align-items:center;gap:10px}
-.nivel-num{font-family:var(--display);font-weight:800;font-size:1.5rem;line-height:1;min-width:2ch;text-align:center}
-.nivel-info{display:flex;flex-direction:column;gap:4px;min-width:150px}
-.nivel-titulo{font-weight:700;font-size:.9rem}
-.xpbar{height:8px;background:var(--surface-2);border:1px solid var(--rule);border-radius:99px;overflow:hidden}
-.xpbar i{display:block;height:100%;background:var(--ink);border-radius:99px;transition:width .5s ease}
-.xp-txt{font-size:.78rem;color:var(--muted)}
-.chama{display:flex;align-items:center;gap:6px;font-weight:700}
-.chama.off{color:var(--muted);font-weight:400}
-.btn{border:1px solid var(--rule);background:var(--surface);padding:8px 14px;border-radius:10px;font-weight:700;font-size:.92rem;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
-.btn:hover{background:var(--surface-2)}
-.btn.forte{background:var(--ink);color:var(--surface);border-color:var(--ink)}
-.btn.forte:hover{opacity:.9}
-.btn.perigo{color:var(--warn)}
-.btn.mini{padding:4px 9px;font-size:.8rem;border-radius:8px}
-.toggle-edit[aria-pressed="true"]{background:var(--l4);border-color:var(--l4);color:#15202B}
+.tm{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);grid-template-rows:auto 1fr auto;height:100%}
+.top{grid-column:1/-1;padding:9px 18px;border-bottom:1px solid var(--bg1);display:flex;gap:18px;flex-wrap:wrap;align-items:center;font-size:13px}
+.top .host{color:var(--gn);font-weight:700}
+.top .host i{color:var(--bl);font-style:normal}
+.top .adm{color:var(--rd)}
+.top .adm b{color:var(--yl);font-weight:500}
+.pane{overflow:auto;padding:14px 18px 30px;min-width:0}
+.pane + .pane{border-left:1px solid var(--bg1)}
+.pr{color:var(--gr);margin:12px 0 4px;overflow-wrap:anywhere}
+.pr:first-child{margin-top:0}
+.pr b{color:var(--gn);font-weight:500}
+.pr i{color:var(--bl);font-style:normal}
+.ln{display:flex;width:100%;white-space:pre;min-height:24px;align-items:center}
+.ln:hover{background:var(--bg1)}
+.ln .t{overflow:hidden;text-overflow:ellipsis}
+.ln .g{color:var(--bg3)}
+.ln .ct{color:var(--gr);margin-left:auto;padding-left:12px}
+.ln.mod .t{color:var(--yl);font-weight:700}
+.ln.tri .t{color:var(--or);font-weight:700}
+.ln.done .t{color:var(--gr)}
+.ln .ck{color:var(--bg3)}
+.ln.done .ck{color:var(--gn)}
+.ln.next .ck{color:var(--yl)}
+.ln.next .t{color:var(--fg);text-decoration:underline;text-decoration-color:var(--yl);text-underline-offset:4px}
+.ln.sel{background:var(--bg2)}
+.bar{color:var(--gn)}
+.bar s{color:var(--bg2);text-decoration:none}
+.out{white-space:pre-wrap;overflow-wrap:anywhere}
+.k{color:var(--rd)}.v{color:var(--aq)}.m{color:var(--gr)}.y{color:var(--yl)}.o{color:var(--or)}.gn{color:var(--gn)}.bl{color:var(--bl)}.pu{color:var(--pu)}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.btn{border:1px solid var(--bg2);padding:6px 12px;color:var(--fg);text-decoration:none;display:inline-flex;gap:8px;align-items:center;min-height:36px}
+.btn:hover{background:var(--bg1)}
+.btn.pri{border-color:var(--yl);color:var(--yl)}
+.btn.okk{border-color:var(--gn);color:var(--gn)}
+.btn.dng{border-color:var(--rd);color:var(--rd)}
+.btn[disabled]{opacity:.35;cursor:default}
+.back{display:none;margin-bottom:10px}
+.vid{position:relative;aspect-ratio:16/9;width:100%;background:#000;border:1px solid var(--bg1)}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid a{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--fg);text-decoration:none;gap:10px}
 
-/* layout */
-.layout{display:grid;grid-template-columns:270px 1fr;min-height:calc(100% - 70px)}
-.linhas{border-right:1px solid var(--rule);padding:20px 16px;display:flex;flex-direction:column;gap:6px}
-.linhas h2{font-family:var(--display);font-size:1rem;margin:0 8px 8px;color:var(--muted);font-weight:700}
-.linha-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;border:1px solid transparent;background:none;text-align:left;width:100%}
-.linha-item:hover{background:var(--surface)}
-.linha-item[aria-current="true"]{background:var(--surface);border-color:var(--rule)}
-.linha-bolha{width:30px;height:30px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:.85rem;flex:none}
-.linha-txt{display:flex;flex-direction:column;min-width:0;flex:1}
-.linha-nome{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.linha-prog{font-size:.8rem;color:var(--muted)}
-.linhas .sep{height:1px;background:var(--rule);margin:12px 4px}
-.aba-btn{background:none;border:0;padding:10px 12px;border-radius:12px;text-align:left;font-weight:700;display:flex;gap:10px;align-items:center}
-.aba-btn:hover{background:var(--surface)}
-.aba-btn[aria-current="true"]{background:var(--surface);outline:1px solid var(--rule)}
+/* neofetch */
+.neo{display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap;margin-top:6px}
+.neo pre{margin:0;color:var(--gn);font:13px/1.25 var(--mono)}
+.neo .info{white-space:pre-wrap;min-width:0;flex:1}
+.neo .sw{display:flex;gap:0;margin-top:10px}
+.neo .sw i{width:22px;height:14px;display:block}
 
-/* mapa */
-.mapa{padding:32px clamp(18px,4vw,56px) 80px;max-width:900px;width:100%}
-.cab-trilha{display:flex;gap:18px;align-items:flex-end;flex-wrap:wrap;margin-bottom:8px}
-.cab-trilha h1{font-family:var(--display);font-weight:800;font-size:clamp(2rem,5vw,3.2rem);line-height:1;letter-spacing:-.03em;margin:0;flex:1 1 300px}
-.cab-desc{color:var(--muted);max-width:62ch;margin:10px 0 18px}
-.prog-geral{display:flex;align-items:center;gap:14px;margin-bottom:26px;flex-wrap:wrap}
-.prog-geral .barra{flex:1 1 200px;height:12px;border-radius:99px;background:var(--surface);border:1px solid var(--rule);overflow:hidden}
-.prog-geral .barra i{display:block;height:100%;background:var(--c);transition:width .5s ease}
-.prog-geral strong{font-family:var(--display);font-size:1.1rem}
-.admin-barra{display:flex;gap:8px;flex-wrap:wrap;padding:12px;border:1px dashed var(--l4);border-radius:12px;margin-bottom:26px;background:color-mix(in srgb,var(--l4) 8%,transparent)}
+/* conquistas */
+.ach{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin-top:6px}
+.ach .on{color:var(--yl)}
+.ach .off{color:var(--bg3)}
+.ach .d{color:var(--gr)}
+.ach .d.on{color:var(--fg)}
 
-.zona{position:relative;margin:0 0 6px}
-.zona-cab{display:flex;align-items:center;gap:14px;padding:6px 0;flex-wrap:wrap}
-.baldeacao{width:44px;height:28px;border-radius:14px;border:4px solid var(--c);background:var(--surface);flex:none;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:.75rem;color:var(--c)}
-.zona.completa .baldeacao{background:var(--c);color:#fff}
-.zona-cab h2{font-family:var(--display);font-size:1.3rem;margin:0;letter-spacing:-.01em}
-.zona-prog{color:var(--muted);font-size:.85rem}
-.zona-admin{display:flex;gap:6px;margin-left:auto}
+/* nano */
+.nano{border:1px solid var(--bg2);display:flex;flex-direction:column}
+.nano .nh{background:var(--fg);color:var(--bg);padding:2px 10px;display:flex;justify-content:space-between;gap:10px}
+.nano .nb{padding:12px;display:flex;flex-direction:column;gap:12px}
+.nano label{color:var(--yl);display:block;margin-bottom:4px}
+.nano input,.nano textarea{width:100%;background:var(--bg0);border:1px solid var(--bg1);color:var(--fg);font:inherit;padding:8px 10px;outline:none}
+.nano input:focus,.nano textarea:focus{border-color:var(--yl)}
+.nano textarea{min-height:120px;resize:vertical}
+.nano .hint{color:var(--gr);font-size:12px;margin-top:4px}
+.nano .nf{display:flex;gap:16px;flex-wrap:wrap;padding:6px 10px;border-top:1px solid var(--bg2)}
+.nano .nf button{display:inline-flex;gap:6px;min-height:32px;align-items:center}
+.nano .nf b{background:var(--fg);color:var(--bg);padding:0 4px;font-weight:500}
 
-.estacoes{list-style:none;margin:0;padding:0 0 18px 20px;position:relative}
-.estacoes::before{content:"";position:absolute;left:18px;top:0;bottom:0;width:8px;background:var(--c);border-radius:4px;opacity:.28}
-.estacoes .trilho-feito{position:absolute;left:18px;top:0;width:8px;background:var(--c);border-radius:4px;transition:height .6s ease}
-.estacao{position:relative;display:flex;align-items:center;gap:8px;min-height:58px}
-.ponto{display:flex;align-items:center;gap:14px;background:none;border:0;padding:8px 10px 8px 0;text-align:left;flex:1;border-radius:12px;min-width:0}
-.ponto:hover .nome{text-decoration:underline;text-underline-offset:3px}
-.circ{width:26px;height:26px;border-radius:50%;border:5px solid var(--c);background:var(--surface);flex:none;position:relative;z-index:1;margin-left:-9px;display:grid;place-items:center;transition:transform .2s}
-.estacao.feita .circ{background:var(--c)}
-.estacao.feita .circ::after{content:"";width:8px;height:5px;border-left:2.5px solid #fff;border-bottom:2.5px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
-.estacao.proxima .circ{width:34px;height:34px;margin-left:-13px;border-width:6px;box-shadow:0 0 0 0 color-mix(in srgb,var(--c) 55%,transparent);animation:pulso 2s infinite}
-@keyframes pulso{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--c) 55%,transparent)}70%{box-shadow:0 0 0 12px transparent}100%{box-shadow:0 0 0 0 transparent}}
-.num{font-family:var(--display);font-weight:700;color:var(--muted);font-size:.85rem;min-width:2.2ch;text-align:right}
-.nome{font-weight:700;overflow-wrap:anywhere}
-.estacao.feita .nome{color:var(--muted);font-weight:400}
-.estacao.proxima .nome{font-size:1.08rem}
-.tag-prox{font-size:.72rem;font-weight:700;background:var(--c);color:#fff;padding:2px 8px;border-radius:99px;white-space:nowrap}
-.tag-mat{font-size:.75rem;color:var(--muted);white-space:nowrap}
-.est-admin{display:flex;gap:4px;flex:none}
-.add-aula{margin:4px 0 0 18px}
+/* cli */
+.cli{grid-column:1/-1;border-top:1px solid var(--bg1);padding:8px 18px 10px;display:flex;flex-direction:column;gap:6px;background:var(--bg)}
+.hist{max-height:110px;overflow:auto;color:var(--gr);font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere}
+.hist .er{color:var(--rd)}.hist .ok{color:var(--gn)}.hist .cm{color:var(--fg)}.hist .ac{color:var(--yl)}
+.inp{display:flex;gap:8px;align-items:center}
+.inp label{color:var(--gn);white-space:nowrap}
+.inp input{flex:1;background:transparent;border:0;color:var(--fg);font:inherit;outline:none;min-width:0;caret-color:var(--yl)}
+.chips{display:none;gap:6px;overflow-x:auto;padding-bottom:2px}
+.chips button{border:1px solid var(--bg2);padding:6px 10px;white-space:nowrap;color:var(--fg);flex:none}
 
-.vazio{border:2px dashed var(--rule);border-radius:18px;padding:40px 28px;text-align:center;color:var(--muted)}
-.vazio h2{font-family:var(--display);color:var(--ink);margin:0 0 8px}
-.carregando{padding:60px;color:var(--muted)}
-
-/* ranking */
-.rank{list-style:none;padding:0;margin:20px 0 0;display:flex;flex-direction:column;gap:8px}
-.rank li{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:12px 16px}
-.rank .pos{font-family:var(--display);font-weight:800;font-size:1.4rem;width:2ch;text-align:center}
-.rank .quem{flex:1;min-width:0}
-.rank .quem strong{display:block}
-.rank .quem span{font-size:.85rem;color:var(--muted)}
-.rank .xp{font-family:var(--display);font-weight:800}
-.rank li.eu{border-color:var(--ink)}
-.aviso{background:var(--surface);border:1px solid var(--rule);border-left:4px solid var(--l4);padding:12px 14px;border-radius:10px;font-size:.92rem;color:var(--muted);margin-top:16px}
-
-/* painel da aula */
-.painel{position:fixed;top:0;right:0;bottom:0;width:min(520px,100%);background:var(--surface);border-left:1px solid var(--rule);z-index:40;transform:translateX(105%);transition:transform .28s ease;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-.painel.aberto{transform:none}
-.painel-cab{display:flex;align-items:flex-start;gap:12px;padding:20px 22px 14px;border-bottom:1px solid var(--rule)}
-.painel-cab .meta{font-size:.85rem;color:var(--muted)}
-.painel-cab h2{font-family:var(--display);margin:2px 0 0;font-size:1.45rem;line-height:1.15}
-.fechar{margin-left:auto;background:none;border:1px solid var(--rule);border-radius:10px;width:38px;height:38px;flex:none;font-size:1.2rem}
-.painel-corpo{padding:18px 22px;overflow:auto;flex:1;display:flex;flex-direction:column;gap:20px}
-.video{aspect-ratio:16/9;background:var(--c);border-radius:14px;display:flex;flex-direction:column;justify-content:flex-end;padding:18px;color:#fff;position:relative;overflow:hidden}
-.video::before{content:"";position:absolute;inset:-40% -10% auto auto;width:70%;aspect-ratio:1;border-radius:50%;border:26px solid rgba(255,255,255,.14)}
-.video .play{position:absolute;inset:0;display:grid;place-items:center}
-.video .play span{width:68px;height:68px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center}
-.video .play span::after{content:"";border-left:20px solid var(--c);border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
-.video a.play{text-decoration:none}
-.video small{position:relative;font-weight:700}
-.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.acoes-video{display:flex;gap:8px;flex-wrap:wrap}
-.secao h3{font-family:var(--display);font-size:1rem;margin:0 0 8px}
-.materiais{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
-.materiais a{display:flex;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--rule);border-radius:10px;text-decoration:none;font-weight:700}
-.materiais a:hover{background:var(--surface-2)}
-.materiais a span{color:var(--muted);font-weight:400;font-size:.82rem;margin-left:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:45%}
-.notas{white-space:pre-wrap;background:var(--surface-2);border-radius:10px;padding:12px 14px;overflow-wrap:anywhere}
-.painel-pe{border-top:1px solid var(--rule);padding:14px 22px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.concluir{flex:1 1 220px;justify-content:center;padding:13px;font-size:1rem}
-.concluir.feito{background:var(--ok);border-color:var(--ok);color:#fff}
-.veu{position:fixed;inset:0;background:rgba(10,15,22,.45);z-index:35;opacity:0;pointer-events:none;transition:opacity .2s}
-.veu.ativo{opacity:1;pointer-events:auto}
-
-/* dialog admin */
-dialog{border:1px solid var(--rule);border-radius:18px;background:var(--surface);color:var(--ink);padding:0;width:min(560px,calc(100% - 24px));max-height:calc(100% - 40px)}
-dialog::backdrop{background:rgba(10,15,22,.5)}
-dialog form{display:flex;flex-direction:column;gap:14px;padding:22px}
-dialog h2{font-family:var(--display);margin:0;font-size:1.35rem}
-.campo{display:flex;flex-direction:column;gap:6px}
-.campo label{font-weight:700;font-size:.92rem}
-.campo small{color:var(--muted);font-size:.82rem}
-.campo input[type=text],.campo input[type=url],.campo textarea{border:1px solid var(--rule);background:var(--surface-2);border-radius:10px;padding:10px 12px;width:100%}
-.campo textarea{min-height:110px;resize:vertical;font-family:ui-monospace,Consolas,monospace;font-size:.88rem}
-.cores{display:flex;gap:10px;flex-wrap:wrap}
-.cores label{position:relative}
-.cores input{position:absolute;opacity:0}
-.cores span{display:block;width:34px;height:34px;border-radius:50%;background:var(--sw);border:3px solid transparent;outline:2px solid transparent}
-.cores input:checked+span{border-color:var(--surface);outline-color:var(--ink)}
-.cores input:focus-visible+span{outline:3px solid var(--focus)}
-.dlg-acoes{display:flex;gap:8px;justify-content:flex-end}
-
-/* toast e celebração */
-.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--surface);padding:12px 18px;border-radius:12px;font-weight:700;z-index:60;opacity:0;transition:.25s;pointer-events:none;max-width:calc(100% - 32px)}
+.toast{position:fixed;left:50%;top:calc(12px + env(safe-area-inset-top,0px));transform:translate(-50%,-8px);background:var(--bg1);color:var(--gn);border:1px solid var(--gn);padding:7px 14px;font:13px var(--mono);z-index:50;opacity:0;pointer-events:none;transition:.2s;max-width:calc(100% - 24px)}
 .toast.on{opacity:1;transform:translate(-50%,0)}
-.festa{position:fixed;inset:0;z-index:70;display:grid;place-items:center;background:rgba(10,15,22,.55);opacity:0;pointer-events:none;transition:opacity .25s}
-.festa.on{opacity:1;pointer-events:auto}
-.festa-card{background:var(--surface);border-radius:24px;padding:36px 40px;text-align:center;max-width:min(420px,calc(100% - 32px));transform:scale(.85);transition:transform .35s cubic-bezier(.2,1.4,.4,1)}
-.festa.on .festa-card{transform:none}
-.festa-card .big{font-family:var(--display);font-weight:800;font-size:5rem;line-height:1;letter-spacing:-.04em}
-.festa-card p{color:var(--muted);margin:8px 0 20px}
-.faisca{position:fixed;width:9px;height:9px;border-radius:2px;z-index:65;pointer-events:none;animation:voa .8s ease-out forwards}
-@keyframes voa{to{transform:translate(var(--dx),var(--dy)) rotate(260deg);opacity:0}}
+.toast.ach{color:var(--yl);border-color:var(--yl)}
+.load{padding:40px 18px;color:var(--gr)}
 
-@media (max-width:820px){
-  .topo{gap:10px}
-  .marca{font-size:1.1rem}
-  .marca svg{width:24px;height:24px}
-  .jogador{width:100%;gap:14px;flex-wrap:nowrap}
-  .nivel{flex:1;min-width:0}
-  .nivel-info{flex:1;min-width:0}
-  .nivel-num{font-size:1.25rem}
-  .mapa{padding:20px 16px 80px}
-  .cab-trilha{gap:12px;align-items:center}
-  .cab-trilha h1{font-size:1.9rem;flex-basis:100%}
-  .cab-desc{margin:6px 0 12px;font-size:.95rem}
-  .prog-geral{margin-bottom:18px;gap:10px}
-  .zona-cab{gap:10px}
-  .zona-cab h2{font-size:1.08rem;flex:1;min-width:0}
-  .baldeacao{width:36px;height:24px;border-width:3px}
-  .estacao{min-height:46px}
-  .ponto{gap:10px;padding:6px 6px 6px 0}
-  .nome{font-size:.95rem}
-  .estacao.proxima .nome{font-size:1rem}
-  .tag-mat{display:none}
-  .layout{grid-template-columns:1fr}
-  .linhas{border-right:0;border-bottom:1px solid var(--rule);flex-direction:row;overflow-x:auto;padding:12px 14px;gap:8px}
-  .linhas h2,.linhas .sep{display:none}
-  .linha-item,.aba-btn{width:auto;flex:none;background:var(--surface);border:1px solid var(--rule)}
-  .linha-txt{max-width:150px}
-  .topo{padding:12px 16px;gap:12px}
-  .nivel-info{min-width:110px}
+@media (max-width:899px){
+  body{font-size:13px}
+  .tm{grid-template-columns:1fr}
+  .pane.side{display:none}
+  .tm.reading .pane.tree{display:none}
+  .tm.reading .pane.side{display:block;border-left:0}
+  .ln{min-height:38px}
+  .back{display:inline-flex}
+  .pane{padding:12px 12px 24px}
+  .top{padding:8px 12px;gap:10px}
+  .cli{padding:6px 12px 10px}
+  .chips{display:flex}
+  .hist{max-height:72px}
+  .neo pre{font-size:11px}
+  .inp input{font-size:16px}
 }
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;transition:none!important}
-}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-<header class="topo">
-  <div class="marca">
-    <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect x="3" y="12" width="24" height="6" rx="3" fill="var(--l2)"/><rect x="12" y="3" width="6" height="24" rx="3" fill="var(--l1)"/><circle cx="15" cy="15" r="6" fill="var(--surface)" stroke="var(--ink)" stroke-width="3"/></svg>
-    Estação Dev
-  </div>
-  <div class="jogador" id="jogador"></div>
-  <div id="ctrl-admin"></div>
-</header>
-<div class="layout">
-  <nav class="linhas" id="linhas" aria-label="Trilhas"></nav>
-  <main class="mapa" id="mapa"><p class="carregando">Carregando trilhas…</p></main>
-</div>
-<div class="veu" id="veu"></div>
-<aside class="painel" id="painel" aria-hidden="true" aria-labelledby="painel-titulo"></aside>
-<dialog id="dlg"></dialog>
+<div id="app"><div class="load">carregando estacao-dev...</div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<div class="festa" id="festa" role="dialog" aria-modal="true" aria-label="Subiu de nível"></div>
-
+<script>window.__CONTEUDO__ = null;</script>
 <script>
-const PALETA = ["#E4572E","#2E86AB","#2F9E64","#E0A526","#7A5AF8","#D6457F"];
-const TITULOS = ["Estagiário","Júnior I","Júnior II","Júnior III","Pleno I","Pleno II","Pleno III","Sênior I","Sênior II","Sênior III","Tech Lead","Arquiteto","Lenda do Stack Overflow"];
-const XP_AULA = 10, XP_MODULO = 50, XP_NIVEL = 100;
-const LS_PROG = "estacao:progresso", LS_RASCUNHO = "estacao:rascunho", LS_ATUAL = "estacao:atual";
+const XP_AULA = 10, XP_MOD = 50, XP_NIV = 100;
+const TITULOS = ["estagiario","junior_i","junior_ii","junior_iii","pleno_i","pleno_ii","pleno_iii","senior_i","senior_ii","senior_iii","tech_lead","arquiteto","lenda_do_stackoverflow"];
+const LS = { prog:"estacao:progresso", ui:"estacao:term", draft:"estacao:rascunho", hist:"estacao:cmdhist", nome:"estacao:nome" };
 
+function lsGet(k,d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
+function lsSet(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+function esc(s){ return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function pad(n){ return String(n).padStart(2,"0"); }
+function ytId(u){ try{ const x = new URL(u); if(x.hostname.includes("youtu.be")) return x.pathname.slice(1).split("/")[0]; if(x.searchParams.get("v")) return x.searchParams.get("v"); const m = x.pathname.match(/\/(embed|shorts|live)\/([^/?]+)/); return m ? m[2] : null; }catch(e){ return null; } }
+function urlOk(u){ try{ const x = new URL(u); return /^https?:$/.test(x.protocol) ? x.href : null; }catch(e){ return null; } }
+function limpaUrl(u){ const id = ytId(u); return id ? "https://youtu.be/" + id : u; }
+function dia(d){ return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()); }
+function rid(){ return Math.random().toString(36).slice(2,10) + Date.now().toString(36).slice(-4); }
+function slugT(t){ return t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,18) || "trilha"; }
+
+const ui0 = lsGet(LS.ui, {});
 const S = {
-  modo: "carregando", rascunho: false,
-  admin: false, editando: false,
-  trilhas: [], atualId: lsGet(LS_ATUAL, null), aba: "mapa",
-  prog: lsGet(LS_PROG, { concl: {} }),
-  aulaAberta: null, verAqui: true,
+  admin: new URLSearchParams(location.search).has("admin"),
+  rascunho: false,
+  trilhas: [], idx: {},
+  prog: lsGet(LS.prog, { concl:{} }),
+  open: new Set(ui0.open || []),
+  tid: ui0.tid || null,
+  aula: null, view: "neofetch", nano: null,
+  player: true,
+  nome: lsGet(LS.nome, "dev"),
+  hist: [], chist: lsGet(LS.hist, []), hpos: -1,
 };
 
-/* ---------- utilidades ---------- */
-function lsGet(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
-function lsSet(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
-function novoId(){ return Math.random().toString(36).slice(2,10) + Date.now().toString(36).slice(-4); }
-function esc(s){ return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
-function linkify(t){
-  return esc(t).replace(/(https?:\/\/[^\s<]+)/g, u => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`);
+/* ---------- dados ---------- */
+function ordenar(){ S.trilhas.sort((a,b) => (a.ordem||0)-(b.ordem||0)); }
+function reindex(){
+  S.idx = {};
+  S.trilhas.forEach(t => (t.modulos||[]).forEach(m => (m.aulas||[]).forEach(a => { S.idx[a.id] = { t, m, a }; })));
+  if(!S.trilhas.find(t => t.id === S.tid)) S.tid = S.trilhas[0] ? S.trilhas[0].id : null;
+  if(S.aula && !S.idx[S.aula]){ S.aula = null; S.view = "neofetch"; }
 }
-function urlSegura(u){ try{ const x = new URL(u); return /^https?:$/.test(x.protocol) ? x.href : null; }catch(e){ return null; } }
-function ytId(url){
-  if(!url) return null;
+async function carregar(){
+  if(S.admin){ const d = lsGet(LS.draft, null); if(d){ S.trilhas = d.trilhas || []; S.rascunho = true; ordenar(); reindex(); return; } }
+  if(window.__CONTEUDO__){ S.trilhas = JSON.parse(JSON.stringify(window.__CONTEUDO__.trilhas || [])); ordenar(); reindex(); return; }
   try{
-    const u = new URL(url);
-    if(u.hostname.includes("youtu.be")) return u.pathname.slice(1).split("/")[0] || null;
-    if(u.searchParams.get("v")) return u.searchParams.get("v");
-    const m = u.pathname.match(/\/(embed|shorts|live)\/([^/?]+)/);
-    return m ? m[2] : null;
-  }catch(e){ return null; }
+    const r = await fetch("conteudo.json", { cache:"no-store" });
+    if(!r.ok) throw new Error(r.status);
+    S.trilhas = (await r.json()).trilhas || [];
+  }catch(e){ S.trilhas = []; say("erro: não consegui ler conteudo.json", "er"); }
+  ordenar(); reindex();
 }
-function hojeStr(d = new Date()){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
-function clone(o){ return JSON.parse(JSON.stringify(o)); }
+function salvarRascunho(){ ordenar(); reindex(); S.rascunho = true; lsSet(LS.draft, { trilhas: S.trilhas, em: new Date().toISOString() }); }
+function salvarUI(){ lsSet(LS.ui, { open:[...S.open], tid:S.tid }); }
 
-/* ---------- cálculo de jogo ---------- */
-function todasAulas(t){ return (t.modulos||[]).flatMap(m => m.aulas||[]); }
-function feita(id){ return !!S.prog.concl[id]; }
-function moduloCompleto(m){ return (m.aulas||[]).length > 0 && m.aulas.every(a => feita(a.id)); }
-function xpTotal(){
-  let xp = Object.keys(S.prog.concl).length * XP_AULA;
-  for(const t of S.trilhas) for(const m of (t.modulos||[])) if(moduloCompleto(m)) xp += XP_MODULO;
-  return xp;
+/* ---------- jogo ---------- */
+const feita = id => !!S.prog.concl[id];
+const aulasDe = t => (t.modulos||[]).flatMap(m => m.aulas||[]);
+const modOk = m => (m.aulas||[]).length > 0 && m.aulas.every(a => feita(a.id));
+const triOk = t => aulasDe(t).length > 0 && aulasDe(t).every(a => feita(a.id));
+function xp(){ let x = 0; Object.keys(S.prog.concl).forEach(id => { if(S.idx[id]) x += XP_AULA; }); S.trilhas.forEach(t => (t.modulos||[]).forEach(m => { if(modOk(m)) x += XP_MOD; })); return x; }
+const nivel = x => Math.floor(x/XP_NIV)+1;
+const titulo = n => TITULOS[Math.min(n-1, TITULOS.length-1)];
+const totalFeitas = () => Object.keys(S.prog.concl).filter(id => S.idx[id]).length;
+function diasSet(){ return new Set(Object.values(S.prog.concl).map(v => dia(new Date(v)))); }
+function streak(){ const ds = diasSet(), d = new Date(); let n = 0; if(!ds.has(dia(d))) d.setDate(d.getDate()-1); while(ds.has(dia(d))){ n++; d.setDate(d.getDate()-1); } return n; }
+function melhorStreak(){ const ds = [...diasSet()].sort(); let best = 0, cur = 0, prev = null; ds.forEach(s => { const d = new Date(s+"T12:00:00"); if(prev && (d - prev) / 864e5 === 1) cur++; else cur = 1; best = Math.max(best, cur); prev = d; }); return best; }
+const prox = t => t ? aulasDe(t).find(a => !feita(a.id)) || null : null;
+const trilha = () => S.trilhas.find(t => t.id === S.tid) || S.trilhas[0] || null;
+function contTr(t){ const as = aulasDe(t), f = as.filter(a => feita(a.id)).length; return { f, n:as.length, pc: as.length ? Math.round(f/as.length*100) : 0 }; }
+function contMod(m){ const f = (m.aulas||[]).filter(a => feita(a.id)).length; return { f, n:(m.aulas||[]).length }; }
+function vizinhos(id){ const r = S.idx[id], l = aulasDe(r.t), i = l.findIndex(a => a.id === id); return { ant:l[i-1], pro:l[i+1] }; }
+function duracao(a){ const m = (a.notas||"").match(/Duração:\s*([\d:]+)/); return m ? m[1] : null; }
+function notasLimpa(a){ return (a.notas||"").replace(/Duração:\s*[\d:]+\s*/,"").trim(); }
+function posDe(id){ const r = S.idx[id]; const mi = r.t.modulos.indexOf(r.m), ai = r.m.aulas.indexOf(r.a); return { mi, ai }; }
+
+const CONQ = [
+  { id:"hello", nome:"hello_world", desc:"concluir a primeira aula", ok:() => totalFeitas() >= 1 },
+  { id:"dez", nome:"loop_for", desc:"concluir 10 aulas", ok:() => totalFeitas() >= 10 },
+  { id:"cinq", nome:"commit_streak", desc:"concluir 50 aulas", ok:() => totalFeitas() >= 50 },
+  { id:"cem", nome:"centenario", desc:"concluir 100 aulas", ok:() => totalFeitas() >= 100 },
+  { id:"mod", nome:"merge_aprovado", desc:"fechar um módulo inteiro", ok:() => S.trilhas.some(t => (t.modulos||[]).some(modOk)) },
+  { id:"tri", nome:"release_1.0", desc:"zerar uma trilha", ok:() => S.trilhas.some(triOk) },
+  { id:"s3", nome:"cron_job", desc:"3 dias seguidos estudando", ok:() => melhorStreak() >= 3 },
+  { id:"s7", nome:"uptime_7d", desc:"7 dias seguidos estudando", ok:() => melhorStreak() >= 7 },
+  { id:"s30", nome:"zero_downtime", desc:"30 dias seguidos estudando", ok:() => melhorStreak() >= 30 },
+  { id:"mar", nome:"deploy_de_sexta", desc:"5 aulas no mesmo dia", ok:() => { const c = {}; return Object.values(S.prog.concl).some(v => { const d = dia(new Date(v)); c[d] = (c[d]||0)+1; return c[d] >= 5; }); } },
+  { id:"cor", nome:"bug_das_3am", desc:"concluir uma aula entre 0h e 5h", ok:() => Object.values(S.prog.concl).some(v => new Date(v).getHours() < 5) },
+  { id:"cedo", nome:"cafe_e_codigo", desc:"concluir uma aula antes das 7h", ok:() => Object.values(S.prog.concl).some(v => { const h = new Date(v).getHours(); return h >= 5 && h < 7; }) },
+];
+const conqOk = () => new Set(CONQ.filter(c => { try{ return c.ok(); }catch(e){ return false; } }).map(c => c.id));
+
+/* ---------- saída ---------- */
+function say(t, c=""){ S.hist.push({ t, c }); S.hist = S.hist.slice(-60); }
+let tt;
+function toast(t, ach){ const el = document.getElementById("toast"); el.textContent = t; el.className = "toast on" + (ach ? " ach" : ""); clearTimeout(tt); tt = setTimeout(() => el.className = "toast", ach ? 3600 : 2400); }
+function barra(p, w){ const f = Math.round(Math.max(0,Math.min(100,p))/100*w); return `<span class="bar">[${"#".repeat(f)}<s>${"-".repeat(w-f)}</s>]</span>`; }
+function prompt(path, c){ return `<div class="pr"><b>${esc(S.nome)}@estacao</b>:<i>${esc(path)}</i>$ ${esc(c)}</div>`; }
+const tpath = t => "~/" + (t ? slugT(t.titulo) : "");
+
+/* ---------- ações ---------- */
+function abrirAula(id){
+  const r = S.idx[id]; if(!r) return;
+  S.aula = id; S.view = "aula"; S.nano = null; S.tid = r.t.id; S.open.add(r.m.id); salvarUI(); render();
+  const p = document.querySelector(".pane.side"); if(p) p.scrollTop = 0;
 }
-function nivelDe(xp){ return Math.floor(xp / XP_NIVEL) + 1; }
-function tituloDe(n){ return TITULOS[Math.min(n-1, TITULOS.length-1)]; }
-function sequencia(){
-  const dias = new Set(Object.values(S.prog.concl).map(v => hojeStr(new Date(v))));
-  let d = new Date(); let n = 0;
-  if(!dias.has(hojeStr(d))) d.setDate(d.getDate()-1);
-  while(dias.has(hojeStr(d))){ n++; d.setDate(d.getDate()-1); }
-  return { n, hoje: dias.has(hojeStr()) };
-}
-function trilhaAtual(){
-  return S.trilhas.find(t => t.id === S.atualId) || S.trilhas[0] || null;
-}
-function proximaAula(t){ return todasAulas(t).find(a => !feita(a.id)) || null; }
-function acharAula(id){
-  for(const t of S.trilhas) for(const m of (t.modulos||[])) for(const a of (m.aulas||[])) if(a.id === id) return { t, m, a };
-  return null;
+function mostrar(v){ S.view = v; S.aula = null; S.nano = null; render(); }
+function toggle(id){ S.open.has(id) ? S.open.delete(id) : S.open.add(id); salvarUI(); render(); }
+function concluir(id){
+  const r = S.idx[id]; if(!r) return;
+  const x0 = xp(), n0 = nivel(x0), c0 = conqOk();
+  if(feita(id)){ delete S.prog.concl[id]; lsSet(LS.prog, S.prog); say("git revert: aula desmarcada", "m"); render(); return; }
+  S.prog.concl[id] = new Date().toISOString(); lsSet(LS.prog, S.prog);
+  const g = xp() - x0, n1 = nivel(xp()), c1 = conqOk();
+  const novas = CONQ.filter(c => c1.has(c.id) && !c0.has(c.id));
+  say(`[ok] ${r.a.titulo} (+${g} xp)`, "ok");
+  if(modOk(r.m)) say(`módulo completo: ${r.m.titulo}`, "ok");
+  if(n1 > n0) say(`level up! nível ${n1}: ${titulo(n1)}`, "ac");
+  novas.forEach(c => say(`conquista desbloqueada: ${c.nome}`, "ac"));
+  render();
+  if(novas.length) toast(`conquista: ${novas[0].nome}`, true);
+  else if(n1 > n0) toast(`level up! ${titulo(n1)}`, true);
+  else toast(`+${g} xp`);
 }
 
-/* ---------- persistência ---------- */
-function gravarRascunho(){
-  S.rascunho = true; lsSet(LS_RASCUNHO, { trilhas: S.trilhas, em: new Date().toISOString() }); render();
+/* ---------- admin ---------- */
+function exportar(){
+  const blob = new Blob([JSON.stringify({ versao:1, gerado:new Date().toISOString(), trilhas:S.trilhas }, null, 2)], { type:"application/json" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "conteudo.json";
+  document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  say("conteudo.json baixado. suba no GitHub pra publicar.", "ok");
 }
-async function salvarTrilha(t){
-  t.atualizado = new Date().toISOString();
-  const i = S.trilhas.findIndex(x => x.id === t.id);
-  if(i >= 0) S.trilhas[i] = t; else S.trilhas.push(t);
-  ordenar(S.trilhas); gravarRascunho();
+function parseMat(txt){ return txt.split("\n").map(l => l.trim()).filter(Boolean).map(l => { const p = l.split("|").map(s => s.trim()); return p.length > 1 ? { titulo:p.slice(0,-1).join(" | "), url:p[p.length-1] } : { titulo:"", url:p[0] }; }).filter(m => urlOk(m.url)); }
+function matTxt(ms){ return (ms||[]).map(m => (m.titulo ? m.titulo + " | " : "") + m.url).join("\n"); }
+function importar(t, txt){
+  let atual = t.modulos[t.modulos.length-1], n = 0;
+  txt.split("\n").map(l => l.trim()).filter(Boolean).forEach(l => {
+    if(l.startsWith("#")){ atual = { id:rid(), titulo:l.replace(/^#+/,"").trim() || "modulo", aulas:[] }; t.modulos.push(atual); return; }
+    if(!atual){ atual = { id:rid(), titulo:"modulo 1", aulas:[] }; t.modulos.push(atual); }
+    const p = l.split("|").map(s => s.trim()).filter(s => s && s !== "-");
+    const ui = p.findIndex(s => urlOk(s));
+    const url = ui >= 0 ? limpaUrl(p[ui]) : "";
+    const dur = p.find(s => /^\d{1,2}(:\d{2}){1,2}$/.test(s));
+    const tit = p.filter((s,i) => i !== ui && s !== dur && s !== "SEM VIDEO").join(" | ") || ("aula " + (atual.aulas.length + 1));
+    atual.aulas.push({ id:rid(), titulo:tit, url, materiais:[], notas: dur ? "Duração: " + dur : "" }); n++;
+  });
+  return n;
 }
-async function apagarTrilha(id){
-  S.trilhas = S.trilhas.filter(t => t.id !== id); gravarRascunho();
+function salvarNano(){
+  const f = document.getElementById("nanoform"); if(!f || !S.nano) return;
+  const v = Object.fromEntries(new FormData(f).entries());
+  const t = trilha(), nz = S.nano;
+  if(nz.tipo === "aula"){
+    const r = S.idx[nz.id]; if(!r) return;
+    r.a.titulo = (v.titulo||"").trim() || r.a.titulo; r.a.url = v.url ? limpaUrl(v.url.trim()) : "";
+    r.a.materiais = parseMat(v.materiais||"");
+    const dur = (v.duracao||"").trim(); r.a.notas = (dur ? "Duração: " + dur + "\n" : "") + (v.notas||"").trim();
+    say("aula salva: " + r.a.titulo, "ok");
+  } else if(nz.tipo === "mod"){
+    const m = t.modulos.find(x => x.id === nz.id); if(m){ m.titulo = (v.titulo||"").trim() || m.titulo; say("módulo salvo: " + m.titulo, "ok"); }
+  } else if(nz.tipo === "trilha"){
+    t.titulo = (v.titulo||"").trim() || t.titulo; t.descricao = (v.descricao||"").trim(); say("trilha salva: " + t.titulo, "ok");
+  } else if(nz.tipo === "import"){
+    const n = importar(t, v.lista||""); say(`${n} aulas importadas em ${t.titulo}`, "ok");
+  }
+  salvarRascunho(); S.nano = null; S.view = nz.tipo === "aula" ? "aula" : "neofetch"; if(nz.tipo !== "aula") S.aula = null;
+  render();
 }
-function salvarProgresso(){ lsSet(LS_PROG, S.prog); }
-function baixarConteudo(){
-  const dados = JSON.stringify({ versao: 1, gerado: new Date().toISOString(), trilhas: S.trilhas }, null, 2);
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(new Blob([dados], { type: "application/json" }));
-  a.download = "conteudo.json"; document.body.appendChild(a); a.click();
-  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
-  toast("conteudo.json baixado. Agora suba ele no GitHub.");
+function abrirNano(tipo, id){ S.nano = { tipo, id }; S.view = "nano"; render(); setTimeout(() => { const i = document.querySelector("#nanoform input, #nanoform textarea"); if(i) i.focus(); }, 30); }
+
+/* ---------- comandos ---------- */
+const CMDS = ["help","neofetch","next","ok","cd","ls","open","tree","fold","player","achievements","status","nome","clear"];
+const ADM = ["add","edit","rm","mv","import","export","discard"];
+function alvoMA(arg, t){ const m = arg.match(/^(\d+)\/(\d+)$/); if(!m) return null; const mod = t.modulos[+m[1]-1]; const a = mod && mod.aulas[+m[2]-1]; return a ? { mod, a } : null; }
+function cmd(raw){
+  const c = raw.trim(); if(!c) return;
+  S.chist.push(c); S.chist = S.chist.slice(-50); lsSet(LS.hist, S.chist); S.hpos = -1;
+  say("$ " + c, "cm");
+  const parts = c.split(/\s+/), k = parts[0].toLowerCase(), arg = parts.slice(1).join(" ");
+  const t = trilha();
+  switch(k){
+    case "help":
+      say("navegação:\n  next            abre a próxima aula\n  ok              conclui a aula aberta\n  open M/A        abre a aula A do módulo M (ex: open 2/5)\n  cd N            troca para a trilha N (cd .. fecha a aula)\n  ls              lista as trilhas\n  tree / fold     expande / recolhe os módulos\n  player          liga/desliga o vídeo embutido\njogo:\n  neofetch        seu resumo\n  achievements    conquistas\n  nome SEU_NOME   muda o nome do prompt\noutros:\n  clear (ou Ctrl+L) · Tab completa · ↑ ↓ histórico");
+      if(S.admin) say("admin:\n  add trilha NOME · add mod NOME · add aula M TÍTULO | URL\n  edit trilha · edit mod M · edit aula M/A\n  rm mod M · rm aula M/A · rm trilha\n  mv mod M up|down · mv aula M/A up|down · mv trilha up|down\n  import          cola uma lista de aulas na trilha atual\n  export          baixa o conteudo.json para subir no GitHub\n  discard         descarta o rascunho", "bl");
+      break;
+    case "neofetch": case "status": mostrar("neofetch"); return;
+    case "achievements": case "conquistas": mostrar("conq"); return;
+    case "ls": S.trilhas.forEach((tr,i) => say(`${pad(i+1)}  ${String(contTr(tr).pc).padStart(3)}%  ${tr.titulo}`)); break;
+    case "next": { const p = prox(t); if(p){ abrirAula(p.id); say("abrindo: " + p.titulo, "ok"); return; } say("nada pendente nesta trilha", "er"); break; }
+    case "ok": case "done": if(S.aula){ concluir(S.aula); return; } say("nenhuma aula aberta. use next", "er"); break;
+    case "cd": {
+      if(arg === ".." || arg === "~" || !arg){ mostrar("neofetch"); return; }
+      const i = parseInt(arg,10)-1;
+      if(S.trilhas[i]){ S.tid = S.trilhas[i].id; S.aula = null; S.view = "neofetch"; const p = prox(S.trilhas[i]); if(p) S.open.add(S.idx[p.id].m.id); salvarUI(); say("trilha: " + S.trilhas[i].titulo, "ok"); }
+      else say("trilha não encontrada. use ls", "er");
+      break;
+    }
+    case "open": { const r = t && alvoMA(arg, t); if(r){ abrirAula(r.a.id); say("abrindo: " + r.a.titulo, "ok"); return; } say("uso: open M/A  (ex: open 2/5)", "er"); break; }
+    case "tree": if(t) t.modulos.forEach(m => S.open.add(m.id)); salvarUI(); break;
+    case "fold": if(t) t.modulos.forEach(m => S.open.delete(m.id)); salvarUI(); break;
+    case "player": S.player = !S.player; say("player: " + (S.player ? "on" : "off")); break;
+    case "nome": { const n = arg.toLowerCase().replace(/[^a-z0-9_-]/g,"").slice(0,16); if(n){ S.nome = n; lsSet(LS.nome, n); say("prompt agora é " + n + "@estacao", "ok"); } else say("uso: nome seu_nome", "er"); break; }
+    case "clear": S.hist = []; break;
+    case "sudo": say("boa tentativa.", "er"); break;
+    case "exit": say("não tem saída. só next.", "m"); break;
+    default:
+      if(S.admin && ADM.includes(k)){ admin(k, parts.slice(1), t); return; }
+      say(`comando não encontrado: ${k}. digite help`, "er");
+  }
+  render();
 }
-async function descartarRascunho(){
-  if(!confirm("Descartar as mudanças não publicadas e voltar ao conteúdo do site?")) return;
-  localStorage.removeItem(LS_RASCUNHO); S.rascunho = false; await carregarPublicado(); render();
+function admin(k, p, t){
+  const sub = (p[0]||"").toLowerCase(), resto = p.slice(1).join(" ");
+  const done = msg => { if(msg) say(msg, "ok"); salvarRascunho(); render(); };
+  if(k === "export"){ exportar(); render(); return; }
+  if(k === "discard"){ if(confirm("Descartar o rascunho e voltar ao conteúdo publicado?")){ localStorage.removeItem(LS.draft); S.rascunho = false; S.aula = null; S.view = "neofetch"; carregar().then(() => { say("rascunho descartado", "ok"); render(); }); } return; }
+  if(k === "import"){ if(!t){ say("crie uma trilha antes: add trilha NOME", "er"); render(); return; } abrirNano("import"); return; }
+  if(k === "add"){
+    if(sub === "trilha"){ if(!resto){ say("uso: add trilha NOME", "er"); render(); return; } const nt = { id:rid(), titulo:resto, sigla:resto.slice(0,2).toUpperCase(), descricao:"", cor:"#FABD2F", ordem:(S.trilhas.reduce((m,x) => Math.max(m, x.ordem||0), 0) + 1), modulos:[] }; S.trilhas.push(nt); S.tid = nt.id; salvarUI(); return done("trilha criada: " + resto); }
+    if(!t){ say("crie uma trilha antes: add trilha NOME", "er"); render(); return; }
+    if(sub === "mod"){ if(!resto){ say("uso: add mod NOME", "er"); render(); return; } const nm = { id:rid(), titulo:resto, aulas:[] }; t.modulos.push(nm); S.open.add(nm.id); return done("módulo criado: " + resto); }
+    if(sub === "aula"){ const mi = parseInt(p[1],10)-1, m = t.modulos[mi]; const txt = p.slice(2).join(" "); if(!m || !txt){ say("uso: add aula M TÍTULO | URL", "er"); render(); return; } const parts = txt.split("|").map(s => s.trim()); const url = parts.length > 1 ? limpaUrl(parts.pop()) : ""; m.aulas.push({ id:rid(), titulo:parts.join(" | "), url, materiais:[], notas:"" }); S.open.add(m.id); return done("aula criada em " + m.titulo); }
+  }
+  if(!t){ say("nenhuma trilha", "er"); render(); return; }
+  if(k === "edit"){
+    if(sub === "trilha"){ abrirNano("trilha"); return; }
+    if(sub === "mod"){ const m = t.modulos[parseInt(p[1],10)-1]; if(m){ abrirNano("mod", m.id); return; } }
+    if(sub === "aula"){ const r = alvoMA(p[1]||"", t); if(r){ S.aula = r.a.id; abrirNano("aula", r.a.id); return; } }
+    if(!sub && S.aula){ abrirNano("aula", S.aula); return; }
+    say("uso: edit trilha · edit mod M · edit aula M/A", "er"); render(); return;
+  }
+  if(k === "rm"){
+    if(sub === "trilha"){ if(confirm(`Excluir a trilha "${t.titulo}" inteira?`)){ S.trilhas = S.trilhas.filter(x => x !== t); S.tid = null; S.aula = null; S.view = "neofetch"; return done("trilha removida"); } render(); return; }
+    if(sub === "mod"){ const mi = parseInt(p[1],10)-1, m = t.modulos[mi]; if(m && confirm(`Excluir o módulo "${m.titulo}" e suas ${m.aulas.length} aulas?`)){ t.modulos.splice(mi,1); return done("módulo removido"); } if(!m) say("uso: rm mod M", "er"); render(); return; }
+    if(sub === "aula"){ const r = alvoMA(p[1]||"", t); if(r && confirm(`Excluir a aula "${r.a.titulo}"?`)){ r.mod.aulas.splice(r.mod.aulas.indexOf(r.a),1); if(S.aula === r.a.id){ S.aula = null; S.view = "neofetch"; } return done("aula removida"); } if(!r) say("uso: rm aula M/A", "er"); render(); return; }
+  }
+  if(k === "mv"){
+    const dirOf = s => s === "up" ? -1 : s === "down" ? 1 : 0;
+    const swap = (arr, i, d) => { const j = i + d; if(!d || j < 0 || j >= arr.length) return false; [arr[i], arr[j]] = [arr[j], arr[i]]; return true; };
+    if(sub === "trilha"){ const d = dirOf(p[1]); const i = S.trilhas.indexOf(t); if(swap(S.trilhas, i, d)){ S.trilhas.forEach((x,n) => x.ordem = n+1); return done("ordem atualizada"); } }
+    if(sub === "mod"){ const i = parseInt(p[1],10)-1; if(swap(t.modulos, i, dirOf(p[2]))) return done("módulo movido"); }
+    if(sub === "aula"){ const r = alvoMA(p[1]||"", t); if(r && swap(r.mod.aulas, r.mod.aulas.indexOf(r.a), dirOf(p[2]))) return done("aula movida"); }
+    say("uso: mv mod M up|down · mv aula M/A up|down · mv trilha up|down", "er"); render(); return;
+  }
+  say("uso inválido. digite help", "er"); render();
 }
+function completar(inp){
+  const v = inp.value, parts = v.split(/\s+/);
+  const pool = CMDS.concat(S.admin ? ADM : []);
+  if(parts.length === 1){
+    const ms = pool.filter(c => c.startsWith(parts[0].toLowerCase()));
+    if(ms.length === 1) inp.value = ms[0] + " ";
+    else if(ms.length > 1){ say(ms.join("  "), "m"); render(); focoCli(); document.getElementById("cmd").value = v; }
+  } else if(["add","edit","rm","mv"].includes(parts[0]) && parts.length === 2){
+    const ms = ["trilha","mod","aula"].filter(s => s.startsWith(parts[1]));
+    if(ms.length === 1) inp.value = parts[0] + " " + ms[0] + " ";
+  }
+}
+function focoCli(){ const i = document.getElementById("cmd"); if(i && matchMedia("(min-width:900px)").matches) i.focus(); }
 
 /* ---------- render ---------- */
+function rTree(t){
+  let h = prompt("~", "ls trilhas/");
+  if(!S.trilhas.length) h += `<div class="out m">nenhuma trilha${S.admin ? ". use: add trilha NOME" : ""}</div>`;
+  S.trilhas.forEach((tr, i) => { const c = contTr(tr), on = t && tr.id === t.id;
+    h += `<button class="ln tri ${on?"sel":""}" data-a="trilha" data-id="${tr.id}"><span class="t">${on?"› ":"  "}${pad(i+1)} ${esc(tr.titulo)}</span><span class="ct">${String(c.pc).padStart(3)}%</span></button>`; });
+  if(!t) return h;
+  const px = prox(t);
+  h += prompt(tpath(t), "tree");
+  if(!t.modulos.length) h += `<div class="out m">trilha vazia${S.admin ? ". use: add mod NOME ou import" : ""}</div>`;
+  t.modulos.forEach((m, mi) => {
+    const om = S.open.has(m.id), cm = contMod(m), last = mi === t.modulos.length - 1;
+    h += `<button class="ln mod" data-a="tog" data-id="${m.id}" aria-expanded="${om}"><span class="g">${last?"└── ":"├── "}</span><span class="t">${om?"▾":"▸"} ${pad(mi+1)} ${esc(m.titulo)}/</span><span class="ct">${cm.f}/${cm.n}</span></button>`;
+    if(om) m.aulas.forEach((a, ai) => {
+      const dn = feita(a.id), nx = px && px.id === a.id, la = ai === m.aulas.length - 1;
+      h += `<button class="ln ${dn?"done":""} ${nx?"next":""} ${S.aula===a.id?"sel":""}" data-a="aula" data-id="${a.id}"><span class="g">${last?"    ":"│   "}${la?"└── ":"├── "}</span><span class="ck">${dn?"[x]":nx?"[>]":"[ ]"}</span><span class="t"> ${S.admin?`<span class="m">${ai+1}</span> `:""}${esc(a.titulo)}</span></button>`;
+    });
+  });
+  return h;
+}
+function rNeo(t){
+  const x = xp(), n = nivel(x), st = streak(), ct = t ? contTr(t) : { f:0, n:0, pc:0 }, px = prox(t), co = conqOk();
+  const logo = String.raw`      ___
+     /   \____
+    | > _      |
+    |__________|
+   ==o======o==
+  //  estacao  \\
+ //    dev      \\`;
+  return `${prompt("~", "neofetch")}
+  <div class="neo"><pre aria-hidden="true">${esc(logo)}</pre><div class="info"><b class="gn">${esc(S.nome)}</b>@<b class="gn">estacao</b>
+<span class="m">${"-".repeat(S.nome.length + 8)}</span>
+<span class="y">nivel</span>:      ${n} (${titulo(n)})
+<span class="y">xp</span>:         ${barra(x % XP_NIV, 16)} ${x % XP_NIV}/${XP_NIV} <span class="m">(${x} total)</span>
+<span class="y">sequencia</span>:  <span class="o">${st} ${st===1?"dia":"dias"}</span> <span class="m">(recorde ${melhorStreak()})</span>
+<span class="y">aulas</span>:      ${totalFeitas()}/${Object.keys(S.idx).length}
+<span class="y">trilha</span>:     ${t ? esc(t.titulo) : "-"}
+<span class="y">progresso</span>:  ${barra(ct.pc, 16)} ${ct.f}/${ct.n}
+<span class="y">conquistas</span>: ${co.size}/${CONQ.length}
+<div class="sw"><i style="background:#282828"></i><i style="background:#FB4934"></i><i style="background:#B8BB26"></i><i style="background:#FABD2F"></i><i style="background:#83A598"></i><i style="background:#D3869B"></i><i style="background:#8EC07C"></i><i style="background:#EBDBB2"></i></div></div></div>
+  ${prompt("~", "next")}
+  ${px ? `<button class="btn pri" data-a="aula" data-id="${px.id}">▶ ${esc(px.titulo)}</button>` : `<div class="out m">${t ? "nada pendente nesta trilha. cd N pra trocar." : "sem trilhas ainda."}</div>`}
+  ${S.admin ? `${prompt("~", "admin --status")}<div class="out"><span class="${S.rascunho?"k":"gn"}">${S.rascunho?"rascunho com mudanças não publicadas":"sem mudanças"}</span>
+<span class="m">digite help pra ver os comandos de edição.${S.rascunho?" export baixa o conteudo.json.":""}</span></div>
+  <div class="acts"><button class="btn" data-cmd="edit trilha">edit trilha</button><button class="btn" data-cmd="import">import</button>${S.rascunho?`<button class="btn okk" data-cmd="export">export</button><button class="btn dng" data-cmd="discard">discard</button>`:""}</div>` : ""}`;
+}
+function rConq(){
+  const co = conqOk();
+  return `${prompt("~", "achievements")}<div class="out m">${co.size} de ${CONQ.length} desbloqueadas</div>
+  <div class="ach">${CONQ.map(c => { const on = co.has(c.id); return `<span class="${on?"on":"off"}">${on?"[★]":"[ ]"}</span><span><span class="${on?"on":"off"}">${esc(c.nome)}</span> <span class="d ${on?"on":""}">${esc(c.desc)}</span></span>`; }).join("")}</div>
+  <div class="acts"><button class="btn" data-cmd="neofetch">‹ neofetch</button></div>`;
+}
+function rAula(){
+  const r = S.idx[S.aula]; if(!r) return rNeo(trilha());
+  const { t, m, a } = r, { mi, ai } = posDe(a.id), dn = feita(a.id), v = vizinhos(a.id), du = duracao(a), nt = notasLimpa(a), id = ytId(a.url);
+  const vid = !id ? `<div class="vid"><span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center" class="m">sem vídeo</span></div>`
+    : S.player ? `<div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}" title="${esc(a.titulo)}" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`
+    : `<div class="vid"><a href="${esc(a.url)}" target="_blank" rel="noopener"><span class="y">▶</span> abrir no youtube</a></div>`;
+  return `<button class="btn back" data-cmd="cd ..">‹ cd ..</button>
+    ${prompt(tpath(t), `play ${mi+1}/${ai+1}`)}
+    ${vid}
+    <div class="acts">
+      <button class="btn ${dn?"okk":"pri"}" data-a="ok" data-id="${a.id}">${dn?"[x] concluída":"[ ] concluir  +10xp"}</button>
+      <button class="btn" data-a="aula" data-id="${v.ant?v.ant.id:""}" ${v.ant?"":"disabled"}>‹ prev</button>
+      <button class="btn" data-a="aula" data-id="${v.pro?v.pro.id:""}" ${v.pro?"":"disabled"}>next ›</button>
+      ${a.url ? `<a class="btn" href="${esc(a.url)}" target="_blank" rel="noopener">youtube ↗</a>` : ""}
+      <button class="btn" data-cmd="player">${S.player?"player: on":"player: off"}</button>
+      ${S.admin ? `<button class="btn" data-cmd="edit aula ${mi+1}/${ai+1}">edit</button>` : ""}
+    </div>
+    ${prompt(tpath(t), `cat ${mi+1}/${ai+1}.md`)}
+    <div class="out"><span class="k">titulo</span>:    <span class="y">${esc(a.titulo)}</span>
+<span class="k">modulo</span>:    ${pad(mi+1)} ${esc(m.titulo)}
+<span class="k">aula</span>:      ${ai+1} de ${m.aulas.length}
+<span class="k">status</span>:    <span class="${dn?"v":"o"}">${dn?"concluída":"pendente"}</span>${du?`
+<span class="k">duracao</span>:   ${du}`:""}${nt?`
+<span class="k">notas</span>:     <span class="m">${esc(nt)}</span>`:""}${(a.materiais||[]).length?`
+<span class="k">materiais</span>:${a.materiais.map(x => `
+  - <a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.titulo||x.url)}</a>`).join("")}`:""}</div>`;
+}
+function rNano(){
+  const nz = S.nano, t = trilha();
+  let titulo_ = "", campos = "";
+  const inp = (n, l, v, ph="") => `<div><label for="f-${n}">${l}</label><input id="f-${n}" name="${n}" value="${esc(v||"")}" placeholder="${esc(ph)}"></div>`;
+  const ta = (n, l, v, ph="", hint="") => `<div><label for="f-${n}">${l}</label><textarea id="f-${n}" name="${n}" placeholder="${esc(ph)}">${esc(v||"")}</textarea>${hint?`<div class="hint">${hint}</div>`:""}</div>`;
+  if(nz.tipo === "aula"){ const r = S.idx[nz.id]; titulo_ = "aula.md";
+    campos = inp("titulo","titulo",r.a.titulo) + inp("url","url do youtube",r.a.url,"https://youtu.be/...") + inp("duracao","duracao",duracao(r.a)||"","12:34")
+      + ta("materiais","materiais",matTxt(r.a.materiais),"Slides | https://...","um por linha: Título | link") + ta("notas","notas",notasLimpa(r.a),"dicas, exercício pra depois..."); }
+  else if(nz.tipo === "mod"){ const m = t.modulos.find(x => x.id === nz.id); titulo_ = "modulo.md"; campos = inp("titulo","titulo",m ? m.titulo : ""); }
+  else if(nz.tipo === "trilha"){ titulo_ = "trilha.md"; campos = inp("titulo","titulo",t.titulo) + ta("descricao","descricao",t.descricao); }
+  else if(nz.tipo === "import"){ titulo_ = "import.txt"; campos = ta("lista",`colar aulas em: ${esc(t.titulo)}`,"","# Nome do módulo\nTítulo da aula | https://youtu.be/ID | 12:34\nOutra aula | https://youtu.be/ID","linha com # cria módulo. aulas antes do primeiro # vão pro último módulo."); }
+  return `${prompt(tpath(t), "nano " + titulo_)}<form class="nano" id="nanoform"><div class="nh"><span>GNU nano</span><span>${titulo_}</span></div><div class="nb">${campos}</div>
+    <div class="nf"><button type="submit"><b>^O</b> salvar</button><button type="button" data-a="nanox"><b>^X</b> cancelar</button></div></form>`;
+}
 function render(){
-  renderJogador(); renderCtrlAdmin(); renderLinhas();
-  renderMapa();
-  if(S.aulaAberta) renderPainel();
-}
-
-function renderJogador(){
-  const xp = xpTotal(), n = nivelDe(xp), resto = xp % XP_NIVEL, seq = sequencia();
-  document.getElementById("jogador").innerHTML = `
-    <div class="nivel" title="Nível ${n}">
-      <span class="nivel-num" aria-label="Nível">${n}</span>
-      <div class="nivel-info">
-        <span class="nivel-titulo">${esc(tituloDe(n))}</span>
-        <div class="xpbar" role="progressbar" aria-valuemin="0" aria-valuemax="${XP_NIVEL}" aria-valuenow="${resto}" aria-label="XP para o próximo nível"><i style="width:${resto}%"></i></div>
-        <span class="xp-txt">${xp} XP · faltam ${XP_NIVEL - resto} para o nível ${n+1}</span>
-      </div>
+  const app = document.getElementById("app"), t = trilha();
+  const x = xp(), n = nivel(x), st = streak();
+  const lendo = S.view !== "neofetch";
+  const side = S.view === "nano" ? rNano() : S.view === "conq" ? rConq() : S.view === "aula" ? rAula() : rNeo(t);
+  const prevVal = document.getElementById("cmd") ? document.getElementById("cmd").value : "";
+  app.innerHTML = `<div class="tm ${lendo?"reading":""}">
+    <div class="top"><span class="host">${esc(S.nome)}@estacao<i>:${esc(tpath(t))}</i></span><span>nv ${n} ${titulo(n)}</span><span>${barra(x % XP_NIV, 12)} ${x}xp</span><span class="o">${st}d</span>${S.admin?`<span class="adm">[admin]${S.rascunho?` <b>rascunho não publicado · export</b>`:""}</span>`:""}</div>
+    <div class="pane tree">${rTree(t)}</div>
+    <div class="pane side">${side}</div>
+    <div class="cli">
+      <div class="hist" id="hist">${S.hist.map(h => `<div class="${h.c}">${esc(h.t)}</div>`).join("")}</div>
+      <div class="chips">${["next","ok","neofetch","achievements","tree","help"].map(c => `<button data-cmd="${c}">${c}</button>`).join("")}</div>
+      <form class="inp" id="cli" autocomplete="off"><label for="cmd">${esc(S.nome)}@estacao:$</label><input id="cmd" value="${esc(prevVal)}" placeholder="digite help" spellcheck="false" autocapitalize="off" autocorrect="off" enterkeyhint="send"></form>
     </div>
-    <span class="chama ${seq.n ? "" : "off"}" title="${seq.hoje ? "Você já estudou hoje" : "Conclua uma aula hoje para manter a sequência"}">
-      <svg width="18" height="20" viewBox="0 0 18 20" aria-hidden="true"><path d="M9 1c1 4 6 6 6 11a6 6 0 0 1-12 0c0-3 2-4 2-7 2 1 3 3 3 5 2-2 2-5 1-9z" fill="${seq.n ? "var(--l1)" : "var(--rule)"}"/></svg>
-      ${seq.n} ${seq.n === 1 ? "dia" : "dias"}
-    </span>`;
-}
-
-function renderCtrlAdmin(){
-  const el = document.getElementById("ctrl-admin");
-  el.innerHTML = S.admin ? `<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-    ${S.rascunho ? `<span class="xp-txt" style="color:var(--warn);font-weight:700">Mudanças não publicadas</span>
-      <button class="btn mini" data-acao="descartar">Descartar</button>
-      <button class="btn forte" data-acao="baixar">Baixar conteudo.json</button>` : ""}
-    <button class="btn toggle-edit" data-acao="toggle-edit" aria-pressed="${S.editando}">${S.editando ? "Sair da edição" : "Editar conteúdo"}</button></div>` : "";
-}
-
-function renderLinhas(){
-  const atual = trilhaAtual();
-  let h = `<h2>Trilhas</h2>`;
-  S.trilhas.forEach((t, i) => {
-    const aulas = todasAulas(t), f = aulas.filter(a => feita(a.id)).length;
-    const pct = aulas.length ? Math.round(f / aulas.length * 100) : 0;
-    h += `<button class="linha-item" style="--c:${esc(t.cor)}" data-acao="ir-trilha" data-id="${t.id}" aria-current="${!!(atual && atual.id === t.id)}">
-      <span class="linha-bolha">${esc((t.sigla || t.titulo || "?").slice(0,2))}</span>
-      <span class="linha-txt"><span class="linha-nome">${esc(t.titulo)}</span><span class="linha-prog">${pct}% · ${f}/${aulas.length} aulas</span></span>
-    </button>`;
-  });
-  if(S.admin && S.editando) h += `<button class="btn" data-acao="nova-trilha" style="margin:6px 4px">+ Nova trilha</button>`;
-
-  document.getElementById("linhas").innerHTML = h;
-}
-
-function renderMapa(){
-  const el = document.getElementById("mapa");
-  if(S.modo === "carregando"){ el.innerHTML = `<p class="carregando">Carregando trilhas…</p>`; return; }
-  const t = trilhaAtual();
-  if(!t){
-    el.innerHTML = S.admin
-      ? `<div class="vazio"><h2>Nenhuma trilha ainda</h2><p>Crie a primeira trilha e cole a lista de aulas do YouTube.</p><button class="btn forte" data-acao="nova-trilha-direto">Criar primeira trilha</button></div>`
-      : `<div class="vazio"><h2>Nenhuma trilha publicada</h2><p>Quando o admin adicionar as aulas, elas aparecem aqui.</p></div>`;
-    return;
-  }
-  const ed = S.admin && S.editando;
-  const aulas = todasAulas(t), f = aulas.filter(a => feita(a.id)).length;
-  const pct = aulas.length ? Math.round(f / aulas.length * 100) : 0;
-  const prox = proximaAula(t);
-  let h = `<div style="--c:${esc(t.cor)}">
-    <div class="cab-trilha">
-      <h1>${esc(t.titulo)}</h1>
-      ${prox ? `<button class="btn forte" data-acao="abrir" data-aula="${prox.id}">${f ? "Continuar de onde parei" : "Começar a trilha"}</button>` : (aulas.length ? `<span class="tag-prox" style="font-size:.9rem;padding:6px 12px">Trilha concluída</span>` : "")}
-    </div>
-    ${t.descricao ? `<p class="cab-desc">${esc(t.descricao)}</p>` : ""}
-    <div class="prog-geral"><div class="barra" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso da trilha"><i style="width:${pct}%"></i></div><strong>${pct}%</strong><span style="color:var(--muted)">${f} de ${aulas.length} aulas</span></div>
-    ${ed ? `<div class="admin-barra">
-      <button class="btn mini" data-acao="editar-trilha">Editar trilha</button>
-      <button class="btn mini" data-acao="novo-modulo">+ Módulo</button>
-      <button class="btn mini" data-acao="importar">Colar lista de aulas</button>
-      <button class="btn mini" data-acao="mover-trilha" data-dir="-1">Subir na lista</button>
-      <button class="btn mini" data-acao="mover-trilha" data-dir="1">Descer na lista</button>
-      <button class="btn mini perigo" data-acao="excluir-trilha">Excluir trilha</button>
-    </div>` : ""}`;
-
-  if(!(t.modulos||[]).length){
-    h += `<div class="vazio"><h2>Trilha sem módulos</h2><p>${ed ? "Adicione um módulo ou cole uma lista de aulas." : "As aulas ainda não foram adicionadas."}</p></div>`;
-  }
-  (t.modulos||[]).forEach((m, mi) => {
-    const ma = m.aulas || [], mf = ma.filter(a => feita(a.id)).length;
-    let feitasSeguidas = 0; for(const a of ma){ if(feita(a.id)) feitasSeguidas++; else break; }
-    const alturaTrilho = ma.length ? (feitasSeguidas / ma.length * 100) : 0;
-    h += `<section class="zona ${moduloCompleto(m) ? "completa" : ""}">
-      <div class="zona-cab">
-        <span class="baldeacao">${mi+1}</span>
-        <h2>${esc(m.titulo)}</h2>
-        <span class="zona-prog">${mf}/${ma.length}${moduloCompleto(m) ? " · +" + XP_MODULO + " XP" : ""}</span>
-        ${ed ? `<div class="zona-admin">
-          <button class="btn mini" data-acao="editar-modulo" data-mod="${m.id}">Renomear</button>
-          <button class="btn mini" data-acao="mover-modulo" data-mod="${m.id}" data-dir="-1" aria-label="Subir módulo">↑</button>
-          <button class="btn mini" data-acao="mover-modulo" data-mod="${m.id}" data-dir="1" aria-label="Descer módulo">↓</button>
-          <button class="btn mini perigo" data-acao="excluir-modulo" data-mod="${m.id}">Excluir</button>
-        </div>` : ""}
-      </div>
-      <ol class="estacoes"><span class="trilho-feito" style="height:${alturaTrilho}%"></span>`;
-    let n = 0;
-    ma.forEach(a => {
-      n++;
-      const cls = feita(a.id) ? "feita" : (prox && prox.id === a.id ? "proxima" : "");
-      const nm = (a.materiais||[]).length;
-      h += `<li class="estacao ${cls}">
-        <button class="ponto" data-acao="abrir" data-aula="${a.id}">
-          <span class="circ"></span><span class="num">${n}</span>
-          <span class="nome">${esc(a.titulo)}</span>
-          ${cls === "proxima" ? `<span class="tag-prox">Próxima</span>` : ""}
-          ${nm ? `<span class="tag-mat">${nm} material${nm > 1 ? "is" : ""}</span>` : ""}
-        </button>
-        ${ed ? `<div class="est-admin">
-          <button class="btn mini" data-acao="editar-aula" data-aula="${a.id}">Editar</button>
-          <button class="btn mini" data-acao="mover-aula" data-aula="${a.id}" data-dir="-1" aria-label="Subir aula">↑</button>
-          <button class="btn mini" data-acao="mover-aula" data-aula="${a.id}" data-dir="1" aria-label="Descer aula">↓</button>
-          <button class="btn mini perigo" data-acao="excluir-aula" data-aula="${a.id}" aria-label="Excluir aula">✕</button>
-        </div>` : ""}
-      </li>`;
-    });
-    h += `</ol>${ed ? `<button class="btn mini add-aula" data-acao="nova-aula" data-mod="${m.id}">+ Aula neste módulo</button>` : ""}</section>`;
-  });
-  h += `</div>`;
-  el.innerHTML = h;
-}
-
-function renderPainel(){
-  const p = document.getElementById("painel");
-  const r = acharAula(S.aulaAberta);
-  if(!r){ fecharPainel(); return; }
-  const { t, m, a } = r;
-  const lista = todasAulas(t), i = lista.findIndex(x => x.id === a.id);
-  const ant = lista[i-1], prox = lista[i+1];
-  const yid = ytId(a.url), link = urlSegura(a.url);
-  const ok = feita(a.id);
-  p.style.setProperty("--c", t.cor);
-  p.innerHTML = `
-    <div class="painel-cab">
-      <div><div class="meta">${esc(t.titulo)} · ${esc(m.titulo)} · aula ${i+1} de ${lista.length}</div>
-      <h2 id="painel-titulo">${esc(a.titulo)}</h2></div>
-      <button class="fechar" data-acao="fechar" aria-label="Fechar">✕</button>
-    </div>
-    <div class="painel-corpo">
-      <div class="video">
-        ${S.verAqui && yid
-          ? `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(yid)}" title="${esc(a.titulo)}" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>`
-          : link ? `<a class="play" href="${esc(link)}" target="_blank" rel="noopener" aria-label="Assistir no YouTube"><span></span></a><small>Abre no YouTube</small>`
-                 : `<small>Esta aula ainda não tem link de vídeo.</small>`}
-      </div>
-      ${link ? `<div class="acoes-video">
-        <a class="btn" href="${esc(link)}" target="_blank" rel="noopener">Assistir no YouTube</a>
-        ${yid ? `<button class="btn" data-acao="ver-aqui">${S.verAqui ? "Fechar player" : "Assistir aqui"}</button>` : ""}
-      </div>` : ""}
-      ${(a.materiais||[]).length ? `<div class="secao"><h3>Materiais</h3><ul class="materiais">${a.materiais.map(x => {
-        const u = urlSegura(x.url); return u ? `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(x.titulo || "Material")}<span>${esc(new URL(u).hostname)}</span></a></li>` : "";
-      }).join("")}</ul></div>` : ""}
-      ${a.notas ? `<div class="secao"><h3>Anotações</h3><div class="notas">${linkify(a.notas)}</div></div>` : ""}
-    </div>
-    <div class="painel-pe">
-      <button class="btn" data-acao="abrir" data-aula="${ant ? ant.id : ""}" ${ant ? "" : "disabled"} aria-label="Aula anterior">‹</button>
-      <button class="btn forte concluir ${ok ? "feito" : ""}" data-acao="concluir" data-aula="${a.id}">${ok ? "Concluída ✓" : "Marcar como concluída  +" + XP_AULA + " XP"}</button>
-      <button class="btn" data-acao="abrir" data-aula="${prox ? prox.id : ""}" ${prox ? "" : "disabled"} aria-label="Próxima aula">›</button>
-    </div>`;
-}
-
-function abrirPainel(id){
-  if(!id) return;
-  if(S.aulaAberta !== id) S.verAqui = true;
-  S.aulaAberta = id; renderPainel();
-  const p = document.getElementById("painel");
-  p.classList.add("aberto"); p.setAttribute("aria-hidden","false");
-  document.getElementById("veu").classList.add("ativo");
-  setTimeout(() => p.querySelector(".fechar")?.focus(), 50);
-}
-function fecharPainel(){
-  S.aulaAberta = null;
-  const p = document.getElementById("painel");
-  p.classList.remove("aberto"); p.setAttribute("aria-hidden","true");
-  document.getElementById("veu").classList.remove("ativo");
-  setTimeout(() => { if(!S.aulaAberta) p.innerHTML = ""; }, 300);
-}
-
-/* ---------- jogo: concluir ---------- */
-function concluir(id, origem){
-  const antesXp = xpTotal(), antesNivel = nivelDe(antesXp);
-  if(feita(id)){ delete S.prog.concl[id]; salvarProgresso(); render(); toast("Aula desmarcada"); return; }
-  S.prog.concl[id] = new Date().toISOString();
-  const r = acharAula(id);
-  const depoisXp = xpTotal(), ganho = depoisXp - antesXp;
-  salvarProgresso(); render();
-  if(origem) faiscas(origem, r ? r.t.cor : PALETA[0]);
-  if(r && moduloCompleto(r.m)) toast(`Módulo "${r.m.titulo}" completo! +${ganho} XP`);
-  else toast(`+${ganho} XP`);
-  if(nivelDe(depoisXp) > antesNivel) festa(nivelDe(depoisXp));
-}
-function faiscas(el, cor){
-  if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const b = el.getBoundingClientRect(), cx = b.left + b.width/2, cy = b.top + b.height/2;
-  const cores = [cor, ...PALETA];
-  for(let i = 0; i < 22; i++){
-    const f = document.createElement("span"); f.className = "faisca";
-    const ang = Math.random() * Math.PI * 2, d = 50 + Math.random() * 90;
-    f.style.cssText = `left:${cx}px;top:${cy}px;background:${cores[i % cores.length]};--dx:${Math.cos(ang)*d}px;--dy:${Math.sin(ang)*d - 30}px`;
-    document.body.appendChild(f); setTimeout(() => f.remove(), 850);
-  }
-}
-function festa(n){
-  const el = document.getElementById("festa");
-  el.innerHTML = `<div class="festa-card"><div class="big">${n}</div><h2 style="font-family:var(--display);margin:6px 0 0">Subiu para ${esc(tituloDe(n))}</h2><p>Mais ${XP_NIVEL} XP e você chega ao nível ${n+1}.</p><button class="btn forte" data-acao="fechar-festa">Bora continuar</button></div>`;
-  el.classList.add("on"); setTimeout(() => el.querySelector("button")?.focus(), 50);
-}
-let toastT;
-function toast(msg){
-  const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("on");
-  clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("on"), 2600);
-}
-
-/* ---------- formulários admin ---------- */
-function formulario(titulo, campos, botao = "Salvar"){
-  return new Promise(resolve => {
-    const d = document.getElementById("dlg");
-    let h = `<form method="dialog"><h2>${esc(titulo)}</h2>`;
-    campos.forEach(c => {
-      h += `<div class="campo"><label for="f-${c.nome}">${esc(c.rotulo)}</label>`;
-      if(c.tipo === "textarea") h += `<textarea id="f-${c.nome}" name="${c.nome}" placeholder="${esc(c.placeholder||"")}">${esc(c.valor||"")}</textarea>`;
-      else if(c.tipo === "cor") h += `<div class="cores" role="radiogroup" id="f-${c.nome}">${PALETA.map((p,i) => `<label><input type="radio" name="${c.nome}" value="${p}" ${p === (c.valor || PALETA[0]) ? "checked" : ""}><span style="--sw:${p}"></span><span class="sr">Cor ${i+1}</span></label>`).join("")}</div>`;
-      else h += `<input type="text" id="f-${c.nome}" name="${c.nome}" value="${esc(c.valor||"")}" placeholder="${esc(c.placeholder||"")}" ${c.obrigatorio ? "required" : ""}>`;
-      if(c.ajuda) h += `<small>${esc(c.ajuda)}</small>`;
-      h += `</div>`;
-    });
-    h += `<div class="dlg-acoes"><button class="btn" value="cancelar" formnovalidate>Cancelar</button><button class="btn forte" value="ok">${esc(botao)}</button></div></form>`;
-    d.innerHTML = h;
-    const f = d.querySelector("form");
-    d.onclose = () => {
-      if(d.returnValue !== "ok") return resolve(null);
-      const fd = new FormData(f), out = {};
-      campos.forEach(c => out[c.nome] = (fd.get(c.nome) || "").toString().trim());
-      resolve(out);
-    };
-    d.returnValue = ""; d.showModal();
-  });
-}
-function parseMateriais(txt){
-  return txt.split("\n").map(l => l.trim()).filter(Boolean).map(l => {
-    const [a, b] = l.split("|").map(s => s.trim());
-    return b ? { titulo: a, url: b } : { titulo: "", url: a };
-  }).filter(x => urlSegura(x.url));
-}
-function materiaisTxt(m){ return (m||[]).map(x => (x.titulo ? x.titulo + " | " : "") + x.url).join("\n"); }
-
-async function acaoAdmin(acao, ds){
-  const t = trilhaAtual() ? clone(trilhaAtual()) : null;
-  const acharMod = id => t.modulos.find(m => m.id === id);
-  const acharPos = id => { for(const m of t.modulos){ const i = m.aulas.findIndex(a => a.id === id); if(i >= 0) return { m, i }; } return null; };
-
-  if(acao === "nova-trilha" || acao === "nova-trilha-direto"){
-    const v = await formulario("Nova trilha", [
-      { nome:"titulo", rotulo:"Nome da trilha", placeholder:"Ex.: Spring Boot do zero", obrigatorio:true },
-      { nome:"sigla", rotulo:"Sigla (2 letras)", placeholder:"SB" },
-      { nome:"descricao", rotulo:"Descrição", tipo:"textarea", placeholder:"Para quem é, o que se aprende" },
-      { nome:"cor", rotulo:"Cor da linha", tipo:"cor", valor: PALETA[S.trilhas.length % PALETA.length] },
-    ], "Criar trilha");
-    if(!v || !v.titulo) return;
-    const nova = { id: novoId(), titulo: v.titulo, sigla: v.sigla, descricao: v.descricao, cor: v.cor || PALETA[0],
-      ordem: S.trilhas.length ? Math.max(...S.trilhas.map(x => x.ordem || 0)) + 1 : 1, modulos: [] };
-    S.atualId = nova.id; lsSet(LS_ATUAL, nova.id); S.editando = true;
-    await salvarTrilha(nova); return;
-  }
-  if(!t) return;
-  if(acao === "editar-trilha"){
-    const v = await formulario("Editar trilha", [
-      { nome:"titulo", rotulo:"Nome da trilha", valor:t.titulo, obrigatorio:true },
-      { nome:"sigla", rotulo:"Sigla (2 letras)", valor:t.sigla },
-      { nome:"descricao", rotulo:"Descrição", tipo:"textarea", valor:t.descricao },
-      { nome:"cor", rotulo:"Cor da linha", tipo:"cor", valor:t.cor },
-    ]);
-    if(!v) return; Object.assign(t, v); return salvarTrilha(t);
-  }
-  if(acao === "excluir-trilha"){
-    if(!confirm(`Excluir a trilha "${t.titulo}" com todas as aulas? Não tem como desfazer.`)) return;
-    S.atualId = null; return apagarTrilha(t.id);
-  }
-  if(acao === "mover-trilha"){
-    const ord = [...S.trilhas].sort((a,b) => (a.ordem||0) - (b.ordem||0));
-    const i = ord.findIndex(x => x.id === t.id), j = i + Number(ds.dir);
-    if(j < 0 || j >= ord.length) return;
-    const outra = clone(ord[j]); const a = t.ordem || i, b = outra.ordem || j;
-    t.ordem = b; outra.ordem = a === b ? b - Number(ds.dir) : a;
-    await salvarTrilha(outra); return salvarTrilha(t);
-  }
-  if(acao === "novo-modulo"){
-    const v = await formulario("Novo módulo", [{ nome:"titulo", rotulo:"Nome do módulo", placeholder:"Ex.: Spring Boot Parte 1", obrigatorio:true }], "Criar módulo");
-    if(!v || !v.titulo) return; t.modulos.push({ id: novoId(), titulo: v.titulo, aulas: [] }); return salvarTrilha(t);
-  }
-  if(acao === "editar-modulo"){
-    const m = acharMod(ds.mod);
-    const v = await formulario("Renomear módulo", [{ nome:"titulo", rotulo:"Nome do módulo", valor:m.titulo, obrigatorio:true }]);
-    if(!v || !v.titulo) return; m.titulo = v.titulo; return salvarTrilha(t);
-  }
-  if(acao === "excluir-modulo"){
-    const m = acharMod(ds.mod);
-    if(!confirm(`Excluir o módulo "${m.titulo}" e suas ${m.aulas.length} aulas?`)) return;
-    t.modulos = t.modulos.filter(x => x.id !== m.id); return salvarTrilha(t);
-  }
-  if(acao === "mover-modulo"){
-    const i = t.modulos.findIndex(m => m.id === ds.mod), j = i + Number(ds.dir);
-    if(j < 0 || j >= t.modulos.length) return;
-    [t.modulos[i], t.modulos[j]] = [t.modulos[j], t.modulos[i]]; return salvarTrilha(t);
-  }
-  if(acao === "nova-aula" || acao === "editar-aula"){
-    const pos = acao === "editar-aula" ? acharPos(ds.aula) : null;
-    const a = pos ? pos.m.aulas[pos.i] : { id: novoId() };
-    const v = await formulario(pos ? "Editar aula" : "Nova aula", [
-      { nome:"titulo", rotulo:"Título", valor:a.titulo, obrigatorio:true },
-      { nome:"url", rotulo:"Link do YouTube", valor:a.url, placeholder:"https://www.youtube.com/watch?v=..." },
-      { nome:"materiais", rotulo:"Materiais", tipo:"textarea", valor:materiaisTxt(a.materiais), placeholder:"Slides | https://...\nRepositório | https://github.com/...", ajuda:"Um por linha, no formato Título | link" },
-      { nome:"notas", rotulo:"Anotações", tipo:"textarea", valor:a.notas, placeholder:"Dicas, pontos de atenção, exercício para fazer depois" },
-    ]);
-    if(!v || !v.titulo) return;
-    Object.assign(a, { titulo: v.titulo, url: v.url, notas: v.notas, materiais: parseMateriais(v.materiais) });
-    if(!pos) acharMod(ds.mod).aulas.push(a);
-    return salvarTrilha(t);
-  }
-  if(acao === "excluir-aula"){
-    const pos = acharPos(ds.aula); if(!confirm(`Excluir a aula "${pos.m.aulas[pos.i].titulo}"?`)) return;
-    pos.m.aulas.splice(pos.i, 1); return salvarTrilha(t);
-  }
-  if(acao === "mover-aula"){
-    const pos = acharPos(ds.aula), j = pos.i + Number(ds.dir);
-    if(j < 0 || j >= pos.m.aulas.length) return;
-    [pos.m.aulas[pos.i], pos.m.aulas[j]] = [pos.m.aulas[j], pos.m.aulas[pos.i]]; return salvarTrilha(t);
-  }
-  if(acao === "importar"){
-    const v = await formulario("Colar lista de aulas", [
-      { nome:"lista", rotulo:"Lista", tipo:"textarea",
-        placeholder:"# Spring Boot Parte 1\nO que é Spring Boot | https://youtu.be/xxxx\nCriando o projeto | https://youtu.be/yyyy\n# Spring Boot Parte 2\n...",
-        ajuda:"Linha com # cria um módulo novo. As outras linhas são aulas: Título | link. Aulas antes do primeiro # vão para o último módulo." },
-    ], "Importar");
-    if(!v || !v.lista) return;
-    let atual = t.modulos[t.modulos.length - 1], cont = 0;
-    for(const linha of v.lista.split("\n").map(l => l.trim()).filter(Boolean)){
-      if(linha.startsWith("#")){ atual = { id: novoId(), titulo: linha.replace(/^#+/, "").trim() || "Módulo", aulas: [] }; t.modulos.push(atual); continue; }
-      if(!atual){ atual = { id: novoId(), titulo: "Módulo 1", aulas: [] }; t.modulos.push(atual); }
-      const partes = linha.split("|").map(s => s.trim());
-      const url = partes.length > 1 ? partes[partes.length - 1] : (urlSegura(partes[0]) ? partes[0] : "");
-      const titulo = partes.length > 1 ? partes.slice(0, -1).join(" | ") : (url ? "Aula " + (atual.aulas.length + 1) : partes[0]);
-      atual.aulas.push({ id: novoId(), titulo, url, materiais: [], notas: "" }); cont++;
-    }
-    await salvarTrilha(t); toast(`${cont} aulas importadas`); return;
-  }
+  </div>`;
+  const h = document.getElementById("hist"); if(h) h.scrollTop = h.scrollHeight;
+  const s = document.querySelector(".ln.sel"); if(s) s.scrollIntoView({ block:"nearest" });
 }
 
 /* ---------- eventos ---------- */
-document.addEventListener("click", e => {
-  const b = e.target.closest("[data-acao]"); if(!b) return;
-  const acao = b.dataset.acao, ds = b.dataset;
-  if(acao === "ir-trilha"){ S.atualId = ds.id; lsSet(LS_ATUAL, ds.id); render(); window.scrollTo({ top: 0 }); return; }
-  if(acao === "baixar"){ baixarConteudo(); return; }
-  if(acao === "descartar"){ descartarRascunho(); return; }
-  if(acao === "abrir"){ abrirPainel(ds.aula); return; }
-  if(acao === "fechar"){ fecharPainel(); return; }
-  if(acao === "ver-aqui"){ S.verAqui = !S.verAqui; renderPainel(); return; }
-  if(acao === "concluir"){ concluir(ds.aula, b); return; }
-  if(acao === "fechar-festa"){ document.getElementById("festa").classList.remove("on"); return; }
-  if(acao === "toggle-edit"){ S.editando = !S.editando; render(); return; }
-  if(S.admin) acaoAdmin(acao, ds);
+document.addEventListener("submit", e => {
+  e.preventDefault();
+  if(e.target.id === "cli"){ const i = document.getElementById("cmd"); const v = i.value; i.value = ""; cmd(v); focoCli(); }
+  if(e.target.id === "nanoform") salvarNano();
 });
-document.getElementById("veu").addEventListener("click", fecharPainel);
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-a],[data-cmd]"); if(!b || b.disabled) return;
+  if(b.dataset.cmd){ cmd(b.dataset.cmd); return; }
+  const a = b.dataset.a, id = b.dataset.id;
+  if(a === "tog") toggle(id);
+  else if(a === "aula"){ if(id) abrirAula(id); }
+  else if(a === "ok") concluir(id);
+  else if(a === "nanox"){ const nz = S.nano; S.nano = null; S.view = nz && nz.tipo === "aula" && S.aula ? "aula" : "neofetch"; render(); }
+  else if(a === "trilha"){ S.tid = id; S.aula = null; S.view = "neofetch"; const p = prox(S.trilhas.find(x => x.id === id)); if(p) S.open.add(S.idx[p.id].m.id); salvarUI(); render(); }
+});
 document.addEventListener("keydown", e => {
-  if(e.key !== "Escape") return;
-  const f = document.getElementById("festa"); if(f.classList.contains("on")){ f.classList.remove("on"); return; }
-  if(S.aulaAberta && !document.getElementById("dlg").open) fecharPainel();
+  const inCli = e.target.id === "cmd";
+  if(S.view === "nano" && e.ctrlKey && (e.key === "o" || e.key === "s")){ e.preventDefault(); salvarNano(); return; }
+  if(S.view === "nano" && e.ctrlKey && e.key === "x"){ e.preventDefault(); document.querySelector('[data-a="nanox"]').click(); return; }
+  if(e.ctrlKey && e.key.toLowerCase() === "l"){ e.preventDefault(); S.hist = []; render(); focoCli(); return; }
+  if(inCli){
+    if(e.key === "Tab"){ e.preventDefault(); completar(e.target); return; }
+    if(e.key === "ArrowUp"){ e.preventDefault(); if(!S.chist.length) return; S.hpos = S.hpos < 0 ? S.chist.length - 1 : Math.max(0, S.hpos - 1); e.target.value = S.chist[S.hpos]; return; }
+    if(e.key === "ArrowDown"){ e.preventDefault(); if(S.hpos < 0) return; S.hpos++; if(S.hpos >= S.chist.length){ S.hpos = -1; e.target.value = ""; } else e.target.value = S.chist[S.hpos]; return; }
+    return;
+  }
+  if(e.target.matches("input,textarea")) return;
+  if(e.key === "Escape" && S.view !== "neofetch"){ mostrar("neofetch"); return; }
+  if(S.aula && S.view === "aula" && (e.key === "ArrowRight" || e.key === "ArrowLeft")){ const v = vizinhos(S.aula); const nx = e.key === "ArrowRight" ? v.pro : v.ant; if(nx) abrirAula(nx.id); return; }
+  if(e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey){ const i = document.getElementById("cmd"); if(i) i.focus(); }
 });
 
-/* ---------- início ---------- */
-function ordenar(lista){ return lista.sort((a,b) => (a.ordem||0) - (b.ordem||0)); }
-async function carregarPublicado(){
-  try{
-    const r = await fetch("conteudo.json", { cache: "no-store" });
-    if(!r.ok) throw new Error(r.status);
-    const j = await r.json(); S.trilhas = ordenar(j.trilhas || []);
-  }catch(e){ S.trilhas = []; if(!S.admin) toast("Não achei o conteudo.json do site."); }
-}
-async function iniciar(){
-  S.admin = new URLSearchParams(location.search).has("admin");
-  render();
-  const rasc = S.admin ? lsGet(LS_RASCUNHO, null) : null;
-  if(rasc){ S.trilhas = ordenar(rasc.trilhas || []); S.rascunho = true; }
-  else await carregarPublicado();
-  S.modo = "pronto"; render();
-}
-iniciar();
+(async () => {
+  await carregar();
+  const t = trilha();
+  if(t && !t.modulos.some(m => S.open.has(m.id))){ const p = prox(t); if(p) S.open.add(S.idx[p.id].m.id); else if(t.modulos[0]) S.open.add(t.modulos[0].id); }
+  say("estacao-dev v1.0 · digite help · Tab completa · ↑ histórico", "m");
+  if(S.admin) say(S.rascunho ? "[admin] rascunho carregado do navegador" : "[admin] modo edição ativo", "bl");
+  if(S.nome === "dev") say("dica: nome seu_nome personaliza o prompt", "m");
+  render(); focoCli();
+})();
 </script>
 </body>
 </html>
